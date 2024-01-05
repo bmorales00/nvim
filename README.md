@@ -1,3 +1,3 @@
 # My Neovim Configuration
 
-- current nvim config, will be updated as time goes one
+- current nvim config, will be updated as time goes on
