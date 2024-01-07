@@ -10,7 +10,8 @@ local config = function()
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "buffers" },
+			--	lualine_b = { "buffers" },
+			lualine_c = { "filename" },
 			lualine_x = { "encoding", "fileformat", "filetype" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
@@ -21,6 +22,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	lazy = false,
 	config = config,
 }
