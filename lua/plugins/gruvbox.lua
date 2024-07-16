@@ -1,7 +1,7 @@
 return {
 	"ellisonleao/gruvbox.nvim",
 	priority = 1000,
-	lazy = false,
+	lazy = true,
 	config = function()
 		--	vim.o.background = "hard"
 		require("gruvbox").setup({
