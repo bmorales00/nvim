@@ -15,7 +15,7 @@ local config = function()
 
 	--lsp
 	lspconfig.lua_ls.setup({
-	  capabilities = capabilities,
+		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {
 			Lua = {
@@ -31,21 +31,20 @@ local config = function()
 			},
 		},
 	})
-  -- typescript
-  lspconfig.tsserver.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = {
-      "typescript",
-    },
-    root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "git"),
-  })
+	-- typescript
+	lspconfig.tsserver.setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+		filetypes = {
+			"typescript",
+		},
+		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "git"),
+	})
 
-
-  --python
+	--python
 
 	lspconfig.pyright.setup({
-    capabilities = capabilities,
+		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {
 			pyright = {
@@ -67,14 +66,13 @@ local config = function()
 	local eslint_d = require("efmls-configs.linters.eslint_d")
 	local prettier = require("efmls-configs.formatters.prettier")
 
-
 	-- configure efm server
 
 	lspconfig.efm.setup({
 		filetypes = {
 			"lua",
 			"python",
-      "typescript"
+			"typescript",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -88,7 +86,7 @@ local config = function()
 			languages = {
 				lua = { luacheck, stylua },
 				python = { flake8, black },
-        typescript  = {eslint_d, prettier}
+				typescript = { eslint_d, prettier },
 			},
 		},
 	})
