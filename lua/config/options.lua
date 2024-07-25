@@ -37,6 +37,7 @@ opt.splitright = true
 opt.splitbelow = true
 opt.autochdir = false
 opt.iskeyword:append("-")
+opt.selection = "exclusive"
 opt.mouse = "a"
 opt.clipboard:append("unnamedplus")
 opt.modifiable = true
