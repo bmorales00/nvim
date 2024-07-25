@@ -22,13 +22,12 @@ local config = function()
 			},
 			live_grep = {
 				file_ignore_patterns = { "node_modules", ".venv" },
-        additional_args = function (_)
-          return{"--hidden", "--no-ignore-vcs"}
-          
-        end,
-        hidden = true,
-        no_ignore = true,
-			},	
+				additional_args = function(_)
+					return { "--hidden", "--no-ignore-vcs" }
+				end,
+				hidden = true,
+				no_ignore = true,
+			},
 		},
 	})
 end
