@@ -13,8 +13,11 @@ local config = function()
 		},
 		pickers = {
 			find_files = {
-				theme = "dropdown",
-				previewer = true,
+				file_ignore_patterns = { ".venv" },
+				additional_args = function(_)
+					return { "--hidden", "--no-ignore-vcs" }
+				end,
+				no_ignore = true,
 				hidden = true,
 			},
 			live_grep = {
