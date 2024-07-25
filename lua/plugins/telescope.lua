@@ -13,7 +13,7 @@ local config = function()
 		},
 		pickers = {
 			find_files = {
-				file_ignore_patterns = { ".venv" },
+				file_ignore_patterns = { "node_modules", ".venv" },
 				additional_args = function(_)
 					return { "--hidden", "--no-ignore-vcs" }
 				end,
@@ -21,13 +21,14 @@ local config = function()
 				hidden = true,
 			},
 			live_grep = {
-				theme = "dropdown",
-				previewer = false,
-			},
-			find_buffers = {
-				theme = "dropdown",
-				previewer = false,
-			},
+				file_ignore_patterns = { "node_modules", ".venv" },
+        additional_args = function (_)
+          return{"--hidden", "--no-ignore-vcs"}
+          
+        end,
+        hidden = true,
+        no_ignore = true,
+			},	
 		},
 	})
 end
