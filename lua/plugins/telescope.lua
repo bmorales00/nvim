@@ -29,14 +29,19 @@ local config = function()
 				no_ignore = true,
 			},
 		},
+    extensions = {
+      "fzf",
+    },
 	})
+  telescope.load_extension("fzf")
 end
 
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.3",
 	lazy = false,
-	dependencies = { "nvim-lua/plenary.nvim" },
+	dependencies ={{ "nvim-lua/plenary.nvim" },
+    {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},},
 	config = config,
 	keys = {
 		keymap.set("n", "<leader>fk", ":Telescope keymaps<CR>"),
