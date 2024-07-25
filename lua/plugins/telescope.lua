@@ -1,4 +1,18 @@
-local keymap = vim.keymap
+local keys = {
+	{ "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer search" },
+	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+	{ "<leader>fc", "<cmd>Telescope git_commits<cr>", desc = "Commits" },
+	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find All Files" },
+	{ "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Git files" },
+	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help" },
+	{ "<leader>fj", "<cmd>Telescope command_history<cr>", desc = "History" },
+	{ "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+	{ "<leader>fl", "<cmd>Telescope lsp_references<cr>", desc = "Lsp References" },
+	{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Old files" },
+	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Ripgrep" },
+	{ "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
+	{ "<leader>ft", "<cmd>Telescope treesitter<cr>", desc = "Treesitter" },
+}
 
 local config = function()
 	local telescope = require("telescope")
@@ -29,26 +43,19 @@ local config = function()
 				no_ignore = true,
 			},
 		},
-    extensions = {
-      "fzf",
-    },
+		extensions = {
+			"fzf",
+		},
 	})
-  telescope.load_extension("fzf")
+	telescope.load_extension("fzf")
 end
 
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.3",
 	lazy = false,
-	dependencies ={{ "nvim-lua/plenary.nvim" },
-    {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},},
+	dependencies = { { "nvim-lua/plenary.nvim" }, 
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
 	config = config,
-	keys = {
-		keymap.set("n", "<leader>fk", ":Telescope keymaps<CR>"),
-		keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>"),
-		keymap.set("n", "<leader>ff", ":Telescope find_files<CR>"),
-		keymap.set("n", "<leader>fa", ":Telescope <CR>"),
-		keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>"),
-		keymap.set("n", "<leader>fb", ":Telescope buffers<CR>"),
-	},
+	keys = keys,
 }
