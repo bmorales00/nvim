@@ -89,7 +89,7 @@ local config = function()
 				typescript = { eslint_d, prettier },
 			},
 		},
-	})
+	}) 
 end
 
 return {
