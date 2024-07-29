@@ -1,6 +1,6 @@
 -- Auto-Format on Save
 local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
-vim.api.nvim_create_autocmd("BufWritePost", {
+vim.api.nvim_create_autocmd("BufWritePre", {
 	group = lsp_fmt_group,
 	callback = function()
 		local efm = vim.lsp.get_clients({ name = "efm" })
