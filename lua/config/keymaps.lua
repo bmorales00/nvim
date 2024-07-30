@@ -1,38 +1,53 @@
-local keymap = vim.keymap
+local mapkey = require("util.keymapper").mapvimkey
 
-local opts = { noremap = true, silent = true }
 -- Buffer Navigation
+mapkey("<leader>bn", "bnext", "n") -- Next buffer
+mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
+mapkey("<leader>bb", "e #", "n") -- Switch to Other Buffer
+mapkey("<leader>`", "e #", "n") -- Switch to Other Buffer
 
-keymap.set("n", "<leader>bn", "bnext", opts) -- Next Buffer
-keymap.set("n", "<leader>bp", "bprevious", opts) -- Previous Buffer
+-- Directory Navigatio}n
+mapkey("<leader>m", "NvimTreeFocus", "n")
+mapkey("<leader>e", "NvimTreeToggle", "n")
 
--- Directory Navigation
-keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", opts)
-keymap.set("n", "<leader>f", ":NvimTreeToggle<CR>", opts)
-
--- Pane Navigation
-keymap.set("n", "<C-h>", "<C-w>h", opts) -- Navigate Left
-keymap.set("n", "<C-j>", "<C-w>j", opts) -- Navigate Down
-keymap.set("n", "<C-k>", "<C-w>k", opts) -- Navigate Up
-keymap.set("n", "<C-l>", "<C-w>l", opts) -- Navigate Right
-keymap.set("n", "<C-h>", "[[<Cmd>wincmd h<CR>]]", opts) -- Navigate Left
-keymap.set("n", "<C-j>", "[[<Cmd>wincmd j<CR>]]", opts) -- Navigate Down
-keymap.set("n", "<C-k>", "[[<Cmd>wincmd k<CR>]]", opts) -- Navigate Up
-keymap.set("n", "<C-l>", "[[<Cmd>wincmd l<CR>]]", opts) -- Navigate Right
-keymap.set("n", "<C-h>", ":TmuxNavigateLeft<CR>", opts) -- Navigate Left
-keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", opts) -- Navigate Down
-keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", opts) -- Navigate Up
-keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>", opts) -- Navigate Right
+-- Pane and Window Navigation
+mapkey("<C-h>", "<C-w>h", "n") -- Navigate Left
+mapkey("<C-j>", "<C-w>j", "n") -- Navigate Down
+mapkey("<C-k>", "<C-w>k", "n") -- Navigate Up
+mapkey("<C-l>", "<C-w>l", "n") -- Navigate Right
+mapkey("<C-h>", "wincmd h", "t") -- Navigate Left
+mapkey("<C-j>", "wincmd j", "t") -- Navigate Down
+mapkey("<C-k>", "wincmd k", "t") -- Navigate Up
+mapkey("<C-l>", "wincmd l", "t") -- Navigate Right
+mapkey("<C-h>", "TmuxNavigateLeft", "n") -- Navigate Left
+mapkey("<C-j>", "TmuxNavigateDown", "n") -- Navigate Down
+mapkey("<C-k>", "TmuxNavigateUp", "n") -- Navigate Up
+mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 
 -- Window Management
-keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split Vertically
-keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split Horizontally
-keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle Minimize
+mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
+mapkey("<leader>sh", "split", "n") -- Split Horizontally
+mapkey("<C-Up>", "resize +2", "n")
+mapkey("<C-Down>", "resize -2", "n")
+mapkey("<C-Left>", "vertical resize +2", "n")
+mapkey("<C-Right>", "vertical resize -2", "n")
+
+-- Show Full File-Path
+mapkey("<leader>pa", "ShowPath", "n") -- Show Full File Path
 
 -- Indenting
-keymap.set("v", "<", "<gv")
-keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true })
+vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
+
+local api = vim.api
 
 -- Comments
-vim.api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
-vim.api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })
+
+if vim.env.TMUX ~= nil then
+	api.nvim_set_keymap("n", "<C-_>", "gtc", { noremap = false })
+	api.nvim_set_keymap("v", "<C-_>", "goc", { noremap = false })
+else
+	api.nvim_set_keymap("n", "<C-/>", "gtc", { noremap = false })
+	api.nvim_set_keymap("v", "<C-/>", "goc", { noremap = false })
+end
+
