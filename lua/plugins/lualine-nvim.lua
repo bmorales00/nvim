@@ -1,7 +1,7 @@
 local config = function()
 	require("lualine").setup({
 		options = {
-			theme = "codedark",
+			theme = "16color",
 			globalstatus = true,
 			--	component_separators = { left = "|", right = "|" },
 			--section_separators = { left = "", right = "" },
@@ -16,7 +16,6 @@ local config = function()
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
 		},
-		tabline = {},
 	})
 end
 
