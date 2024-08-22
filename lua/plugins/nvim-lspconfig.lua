@@ -73,8 +73,8 @@ local config = function()
 			"lua",
 			"python",
 			"typescript",
-      "json",
-      "jsonc",
+			"json",
+			"jsonc",
 		},
 		init_options = {
 			documentFormatting = true,

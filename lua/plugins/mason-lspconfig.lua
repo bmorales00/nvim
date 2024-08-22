@@ -8,7 +8,7 @@ local opts = {
 		"pyright",
 		"lua_ls",
 		--	"emmet_ls",
-		--	"jsonls",
+		"jsonls",
 		--	"clangd",
 	},
 
