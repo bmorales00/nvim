@@ -10,7 +10,7 @@ local opts = {
 		--	"emmet_ls",
 		"jsonls",
 		--	"clangd",
-    "debugpy",
+		-- "debugpy",
 	},
 
 	automatic_installation = true,
