@@ -1,8 +1,9 @@
+-- Debugger Plugin for Python
 return {
 	"mfussenegger/nvim-dap-python",
 	ft = "python", -- filetype
 	config = function()
-		require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+		require("dap-python").setup("/usr/bin/python3")
 	end,
 	dependencies = {
 		"mfussenegger/nvim-dap",
