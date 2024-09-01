@@ -1,3 +1,4 @@
+-- Adds autopairs to languages such as {  - > {}
 return {
 	"windwp/nvim-autopairs",
 	event = "InsertEnter",
