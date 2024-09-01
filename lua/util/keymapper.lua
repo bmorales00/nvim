@@ -1,3 +1,4 @@
+-- This is a keymapper file for neovim configuration
 local vim_modes = {
 	n = "n",
 	i = "i",

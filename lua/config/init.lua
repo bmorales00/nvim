@@ -1,3 +1,6 @@
+-- Init file for neovim
+-- This file is responsible for setting up the configuration
+-- This is based on the lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

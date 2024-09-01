@@ -1,3 +1,5 @@
+-- This file is responsible for setting up the keymaps
+
 local mapkey = require("util.keymapper").mapvimkey
 
 -- Buffer Navigation
@@ -50,4 +52,3 @@ else
 	api.nvim_set_keymap("n", "<C-/>", "gtc", { noremap = false })
 	api.nvim_set_keymap("v", "<C-/>", "goc", { noremap = false })
 end
-

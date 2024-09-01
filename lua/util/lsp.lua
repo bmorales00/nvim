@@ -1,3 +1,4 @@
+-- This file contains the configuration for the LSP client
 local keymap = vim.keymap
 
 local M = {}

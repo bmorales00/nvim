@@ -1,3 +1,4 @@
+-- THis file is responsible for setting up the options for neovim
 local opt = vim.opt
 
 -- Tab / Indentation

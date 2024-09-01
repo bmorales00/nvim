@@ -1,3 +1,4 @@
+-- Icons for the DAP and LSP
 local M = {}
 
 M.debugging_signs = {
