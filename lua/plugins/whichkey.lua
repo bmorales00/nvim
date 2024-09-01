@@ -1,6 +1,6 @@
 -- WhichKey is a popup menu that shows the keybindings available in the current mode.
-return{
+return {
 	"folke/which-key.nvim",
-  lazy = false,
-  opts = {}
+	lazy = false,
+	opts = {},
 }

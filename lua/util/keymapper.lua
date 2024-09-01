@@ -68,4 +68,3 @@ return {
 	mapvimkey = mapvimkey,
 	maplazykey = maplazykey,
 }
-
