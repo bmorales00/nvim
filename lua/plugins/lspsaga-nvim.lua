@@ -1,3 +1,4 @@
+-- lspsaga improves the neovim built-in LSP UI
 return {
 	"glepnir/lspsaga.nvim",
 	lazy = false,

@@ -1,3 +1,4 @@
+-- Theme for neovim
 return {
 	"ramojus/mellifluous.nvim",
 	version = "v0.*",

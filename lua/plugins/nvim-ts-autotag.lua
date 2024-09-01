@@ -1,3 +1,4 @@
+-- Plugin that uses treesitter to automatically close and rename tags
 return {
 	"windwp/nvim-ts-autotag",
 	lazy = false,

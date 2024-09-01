@@ -1,9 +1,10 @@
+-- Neorg is a note taking plugin for neovim
 return {
 	{
 		"nvim-neorg/neorg",
 		build = ":Neorg sync-parsers",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		lazy = false,
+		lazy = true,
 		config = function()
 			require("neorg").setup({
 				load = {

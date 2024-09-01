@@ -1,3 +1,4 @@
+-- Treesitter is a plugin that provides a better way to display syntax highlighting in Neovim.
 local config = function()
 	require("nvim-treesitter.configs").setup({
 		build = ":TSUpdate",
@@ -19,16 +20,16 @@ local config = function()
 			"markdown",
 			"bash",
 			"lua",
-      "luadoc",
+			"luadoc",
 			"dockerfile",
 			"solidity",
 			"gitignore",
 			"python",
 			"regex",
 			"vim",
-      "vimdoc",
-      "diff",
-      "c",
+			"vimdoc",
+			"diff",
+			"c",
 			--"vue",
 			--"svelte",
 			--"toml",

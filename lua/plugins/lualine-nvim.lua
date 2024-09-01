@@ -1,3 +1,4 @@
+-- lualine is a fast and light statusline plugin for Neovim.
 local config = function()
 	require("lualine").setup({
 		options = {
@@ -10,7 +11,7 @@ local config = function()
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "buffers" },
+			lualine_b = { "buffers" }, -- Changed this eventually
 			lualine_c = { "" },
 			lualine_x = { "encoding", "fileformat", "filetype" },
 			lualine_y = { "progress" },

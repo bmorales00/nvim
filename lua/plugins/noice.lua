@@ -1,3 +1,5 @@
+-- Noice is a plugin that provides a better way to display messages in Neovim such as
+-- LSP messages, quickfix list, and more.
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
@@ -36,7 +38,7 @@ return {
 			config = function()
 				require("notify").setup({
 					render = "compact",
-				--	top_down = false,
+					--	top_down = false,
 					fade_in_slide_out = true,
 					background_colour = "#000000",
 				})

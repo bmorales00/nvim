@@ -1,3 +1,4 @@
+-- Telescope is a highly customizable fuzzy finder over lists. It's a great way to find files, buffers, and more.
 local keys = {
 	{ "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer search" },
 	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },

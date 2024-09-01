@@ -1,3 +1,4 @@
-return{
-  "nvim-tree/nvim-web-devicons",
+-- Icons for neovim
+return {
+	"nvim-tree/nvim-web-devicons",
 }

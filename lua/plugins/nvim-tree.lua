@@ -1,3 +1,4 @@
+-- A file explorer tree for neovim
 return {
 	"nvim-tree/nvim-tree.lua",
 	lazy = false,

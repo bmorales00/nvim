@@ -1,3 +1,5 @@
+-- Package Manager for neovim that runs every time neovim is started
+-- Easily installs and manages LSP Servers, DAP Servers, linters and formatters
 return {
 	"williamboman/mason.nvim",
 	cmd = "Mason",

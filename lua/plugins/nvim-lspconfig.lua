@@ -1,3 +1,4 @@
+-- Configs for LSP client
 local on_attach = require("util.lsp").on_attach
 
 local config = function()
