@@ -1,20 +1,15 @@
 -- Configs for LSP client
 local on_attach = require("util.lsp").on_attach
+local diagnostic_signs = require("util.icons").diagnostic_signs
 
 local config = function()
+	require("neoconf").setup({})
+
 	local lspconfig = require("lspconfig")
-
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-	local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-	end
-
 	local capabilities = cmp_nvim_lsp.default_capabilities()
 
-	--lsp
+	--lua
 	lspconfig.lua_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -25,8 +20,9 @@ local config = function()
 				},
 				workspace = {
 					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.stdpath("config") .. "/lua"] = true,
+						vim.fn.expand("$VIMRUNTIME/lua"),
+						vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/lua",
+						vim.fn.stdpath("config") .. "/lua",
 					},
 				},
 			},
@@ -55,11 +51,19 @@ local config = function()
 					autoSearchPaths = true,
 					diagnosticMode = "workspace",
 					autoImportCompletions = true,
+					typeCheckingMode = "basic",
 				},
 			},
 		},
 	})
 
+  -- icon display
+	for type, icon in pairs(diagnostic_signs) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	end
+
+  -- linters and formatters
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
 	local flake8 = require("efmls-configs.linters.flake8")
