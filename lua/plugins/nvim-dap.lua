@@ -1,11 +1,11 @@
+-- Debugger Plugin
 local debugging_signs = require("util.icons").debugging_signs
-
 return {
 	"mfussenegger/nvim-dap",
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
-
+    
 		-- set custom icons
 		for name, sign in pairs(debugging_signs) do
 			sign = type(sign) == "table" and sign or { sign }
