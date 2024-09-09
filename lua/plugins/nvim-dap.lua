@@ -21,19 +21,19 @@ return {
 		-- add event listeners
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open()
-			vim.cmd("Hardtime disable")
-			vim.cmd("NvimTreeClose")
+			--vim.cmd("Hardtime disable")
+			--vim.cmd("NvimTreeClose")
 		end
 
 		dap.listeners.before.event_terminated["dapui_config"] = function()
 			dapui.close()
-			vim.cmd("Hardtime enable")
+			--vim.cmd("Hardtime disable")
 		end
 
 		dap.listeners.before.event_exited["dapui_config"] = function()
 			dapui.close()
-			vim.cmd("Hardtime enable")
+			--vim.cmd("Hardtime disable")
 		end
 	end,
-	dependencies = "rcarriga/nvim-dap-ui",
+	dependencies = { "rcarriga/nvim-dap-ui", "mfussenegger/nvim-dap-python" },
 }
