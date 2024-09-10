@@ -52,3 +52,10 @@ else
 	api.nvim_set_keymap("n", "<C-/>", "gtc", { noremap = false })
 	api.nvim_set_keymap("v", "<C-/>", "goc", { noremap = false })
 end
+
+-- DAP (Debugger Adapter Protocol)
+mapkey("<leader>db", "DapToggleBreakpoint", "n")
+mapkey("<F5>", "DapContinue", "n")
+mapkey("<F6>", "DapStepOver", "n")
+mapkey("<F7>", "DapStepInto", "n")
+mapkey("<F8>", "DapStepOut", "n")
