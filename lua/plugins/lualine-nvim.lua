@@ -2,7 +2,7 @@
 local config = function()
 	require("lualine").setup({
 		options = {
-			theme = "16color",
+			theme = "auto",
 			globalstatus = true,
 			--	component_separators = { left = "|", right = "|" },
 			--section_separators = { left = "", right = "" },
@@ -11,7 +11,10 @@ local config = function()
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "buffers" }, -- Changed this eventually
+			lualine_b = {
+				{ "filename", file_status = false, path = 1 },
+				{ "diagnostics", update_in_insert = true },
+			},
 			lualine_c = { "" },
 			lualine_x = { "encoding", "fileformat", "filetype" },
 			lualine_y = { "progress" },

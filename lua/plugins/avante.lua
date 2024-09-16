@@ -1,4 +1,4 @@
--- Avante is a AI powered code assistant 
+-- Avante is a AI powered code assistant
 return {
 	"yetone/avante.nvim",
 	event = "VeryLazy",
