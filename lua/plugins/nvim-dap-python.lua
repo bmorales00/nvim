@@ -3,7 +3,7 @@ return {
 	"mfussenegger/nvim-dap-python",
 	ft = "python", -- filetype
 	config = function()
-		require("dap-python").setup("~/.virtualenvs/myenv/bin/python")
+		require("dap-python").setup(os.getenv("VIRTUAL_ENV") .. "/bin/python")
 	end,
 	dependencies = {
 		"mfussenegger/nvim-dap",
