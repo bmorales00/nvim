@@ -5,7 +5,6 @@ return {
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
-    
 		-- set custom icons
 		for name, sign in pairs(debugging_signs) do
 			sign = type(sign) == "table" and sign or { sign }
