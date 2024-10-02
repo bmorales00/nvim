@@ -39,6 +39,16 @@ return {
 					ellipsis_char = "...",
 				}),
 			},
+			window = {
+				completion = {
+					border = "rounded",
+					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+				},
+				documentation = {
+					border = "rounded",
+					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+				},
+			},
 		})
 	end,
 	dependencies = {
