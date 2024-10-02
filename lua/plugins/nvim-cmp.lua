@@ -31,8 +31,8 @@ return {
 				{ name = "luasnip" }, -- snippets
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
-        { name = "cmdline"}, -- command line
-        { name = "nvim_lua"}, -- nvim-cmp for nvim lua API
+				{ name = "cmdline" }, -- command line
+				{ name = "nvim_lua" }, -- nvim-cmp for nvim lua API
 			}),
 			-- configure lspkind for vs-code like icons
 			formatting = {
