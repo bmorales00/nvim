@@ -8,7 +8,7 @@ local config = function()
 			component_separators = { left = "", right = "" },
 		},
 		sections = {
-			lualine_a = { "mode" },
+			lualine_a = { { "mode", icon = "𒉭" } },
 			lualine_b = {
 				{ "filename", file_status = false, path = 1 },
 				{ "diagnostics", update_in_insert = true },
