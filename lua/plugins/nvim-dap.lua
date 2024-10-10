@@ -34,5 +34,5 @@ return {
 			--vim.cmd("Hardtime disable")
 		end
 	end,
-	dependencies = { "rcarriga/nvim-dap-ui", "mfussenegger/nvim-dap-python" },
+	dependencies = { "rcarriga/nvim-dap-ui", "mfussenegger/nvim-dap-python", "nvim-neotest/nvim-nio" },
 }
