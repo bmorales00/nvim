@@ -14,9 +14,15 @@ return {
 			definition_action_keys = {
 				edit = "<CR>",
 			},
+			rename = {
+				quit = "<C-k>",
+				exec = "<CR>",
+				in_select = false,
+			},
 		})
 	end,
-	--dependencies = {
-	--	"nvim-treesitter/nvim-treesitter",
-	--},
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		"nvim-tree/nvim-web-devicons",
+	},
 }

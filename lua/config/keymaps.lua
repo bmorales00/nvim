@@ -43,6 +43,9 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 
 local api = vim.api
 
+-- Refactoring 
+api.nvim_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { noremap = true, silent = true })
+
 -- Comments
 
 if vim.env.TMUX ~= nil then
