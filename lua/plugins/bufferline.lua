@@ -11,7 +11,7 @@ return {
 				offsets = {
 					{
 						filetype = "NvimTree",
-						text = " NvimTree Explorer",
+						text = " File Explorer",
 						separator = true,
 						text_align = "left",
 					},
