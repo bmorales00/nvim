@@ -57,19 +57,34 @@ local config = function()
 		},
 	})
 
-  -- icon display
+  -- css,sass,scss,html
+  lspconfig.emmet_ls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = {
+      "css",
+      "scss",
+      "sass",
+      "less",
+      "html",
+    },
+  })
+
+
+	-- icon display
 	for type, icon in pairs(diagnostic_signs) do
 		local hl = "DiagnosticSign" .. type
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 	end
 
-  -- linters and formatters
+	-- linters and formatters
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
 	local flake8 = require("efmls-configs.linters.flake8")
 	local black = require("efmls-configs.formatters.black")
 	local eslint_d = require("efmls-configs.linters.eslint_d")
 	local prettier = require("efmls-configs.formatters.prettier")
+	local prettier_d = require("efmls-configs.formatters.prettier_d")
 
 	-- configure efm server
 
@@ -80,6 +95,9 @@ local config = function()
 			"typescript",
 			"json",
 			"jsonc",
+			"html",
+			"css",
+      "markdown"
 		},
 		init_options = {
 			documentFormatting = true,
@@ -94,6 +112,8 @@ local config = function()
 				lua = { luacheck, stylua },
 				python = { flake8, black },
 				typescript = { eslint_d, prettier },
+				html = { prettier_d },
+				css = { prettier_d },
 			},
 		},
 	})
