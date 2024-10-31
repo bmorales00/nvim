@@ -57,19 +57,41 @@ local config = function()
 		},
 	})
 
-  -- css,sass,scss,html
-  lspconfig.emmet_ls.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = {
-      "css",
-      "scss",
-      "sass",
-      "less",
-      "html",
-    },
-  })
+	-- css,sass,scss,html
+	-- Needed npm install on emmet
+	lspconfig.emmet_ls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = {
+			"css",
+			"scss",
+			"sass",
+			"less",
+			"html",
+		},
+	})
 
+	-- HTML LSP | npm vscode-langservers-extracted needed
+	lspconfig.html.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+	})
+
+	lspconfig.cssls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {
+			css = {
+				validate = true,
+			},
+			scss = {
+				validate = true,
+			},
+			less = {
+				validate = true,
+			},
+		},
+	})
 
 	-- icon display
 	for type, icon in pairs(diagnostic_signs) do
@@ -83,7 +105,7 @@ local config = function()
 	local flake8 = require("efmls-configs.linters.flake8")
 	local black = require("efmls-configs.formatters.black")
 	local eslint_d = require("efmls-configs.linters.eslint_d")
-	local prettier = require("efmls-configs.formatters.prettier")
+	--local prettier = require("efmls-configs.formatters.prettier")
 	local prettier_d = require("efmls-configs.formatters.prettier_d")
 
 	-- configure efm server
@@ -97,7 +119,7 @@ local config = function()
 			"jsonc",
 			"html",
 			"css",
-      "markdown"
+			"markdown",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -111,7 +133,7 @@ local config = function()
 			languages = {
 				lua = { luacheck, stylua },
 				python = { flake8, black },
-				typescript = { eslint_d, prettier },
+				typescript = { eslint_d, prettier_d },
 				html = { prettier_d },
 				css = { prettier_d },
 			},
