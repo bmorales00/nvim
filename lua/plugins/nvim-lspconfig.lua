@@ -140,24 +140,28 @@ local config = function()
 	})
 
 	-- angular ls
-	local ok, mason_registry = pcall(require, "mason_registry")
+	local ok, mason_registry = pcall(require, "mason-registry")
 	if not ok then
-		vim.notify("mason_registry could not be loaded")
+		vim.notify("mason-registry could not be loaded")
 		return
 	end
 	local angularls_path = mason_registry.get_package("angular-language-server"):get_install_path()
 
+	local cmd = {
+		"ngserver",
+		"--stdio",
+		"--tsProbeLocations",
+		table.concat({ angularls_path, vim.uv.cwd() }, ","),
+		"--ngProbeLocations",
+		table.concat({ angularls_path .. "/node_modules/@angular/language-server", vim.uv.cwd() }, ","),
+	}
 	lspconfig.angularls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-		cmd = {
-			"ngserver",
-			"--stdio",
-			"--tsProbeLocations",
-			table.concat({ angularls_path, vim.uv.cwd() }, ","),
-			"--ngProbeLocations",
-			table.concat({ angularls_path .. "/node_modules/@angular/language-server", vim.uv.cwd() }, ","),
-		},
+		cmd = cmd,
+		on_new_config = function(new_config, new_root_dir)
+			new_config.cmd = cmd
+		end,
 	})
 end
 
