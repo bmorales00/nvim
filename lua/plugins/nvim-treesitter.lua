@@ -30,6 +30,7 @@ local config = function()
 			"vimdoc",
 			"diff",
 			"c",
+      "angular",
 			--"vue",
 			--"svelte",
 			--"toml",
