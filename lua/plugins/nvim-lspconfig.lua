@@ -58,7 +58,6 @@ local config = function()
 	})
 
 	-- css,sass,scss,html
-	-- Needed npm install on emmet
 	lspconfig.emmet_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -138,6 +137,13 @@ local config = function()
 				css = { prettier_d },
 			},
 		},
+	})
+
+	-- angular ls
+	lspconfig.angularls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		cmd = { "ngserver", "--stdio", "--tsProbeLocations", "/usr/lib/node_modules" },
 	})
 end
 
