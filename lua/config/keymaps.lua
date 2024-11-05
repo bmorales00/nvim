@@ -5,6 +5,7 @@ local mapkey = require("util.keymapper").mapvimkey
 -- Buffer Navigation
 mapkey("<leader>bn", "bnext", "n") -- Next buffer
 mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
+mapkey("<leader>bd", "bdelete", "n") -- Del buffer
 mapkey("<leader>bb", "e #", "n") -- Switch to Other Buffer
 mapkey("<leader>`", "e #", "n") -- Switch to Other Buffer
 
@@ -43,7 +44,7 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 
 local api = vim.api
 
--- Refactoring 
+-- Refactoring
 api.nvim_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { noremap = true, silent = true })
 
 -- Comments
