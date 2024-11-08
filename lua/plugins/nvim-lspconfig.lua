@@ -92,6 +92,12 @@ local config = function()
 		},
 	})
 
+  -- Java LSP
+  lspconfig.jdtls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
+
 	-- icon display
 	for type, icon in pairs(diagnostic_signs) do
 		local hl = "DiagnosticSign" .. type
