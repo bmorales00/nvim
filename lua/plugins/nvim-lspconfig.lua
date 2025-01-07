@@ -92,11 +92,22 @@ local config = function()
 		},
 	})
 
-  -- Java LSP
-  lspconfig.jdtls.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-  })
+	-- Java LSP
+	lspconfig.jdtls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {
+			java = {
+				configuration = {
+					runtimes = {
+						name = "JavaSE-21",
+						path = "/opt/jdk-21",
+						default = true,
+					},
+				},
+			},
+		},
+	})
 
 	-- icon display
 	for type, icon in pairs(diagnostic_signs) do
