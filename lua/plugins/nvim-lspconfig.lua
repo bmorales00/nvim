@@ -1,6 +1,7 @@
 -- Configs for LSP client
 local on_attach = require("util.lsp").on_attach
 local diagnostic_signs = require("util.icons").diagnostic_signs
+local severity = vim.diagnostic.severity
 
 local config = function()
 	require("neoconf").setup({})
@@ -110,10 +111,20 @@ local config = function()
 	})
 
 	-- icon display
+	local signs = {
+		text = {},
+		linehl = {},
+		numhl = {},
+	}
+
 	for type, icon in pairs(diagnostic_signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		-- local hl = "DiagnosticSign" .. type
+		-- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		signs.text[severity[icon.name]] = icon.text
+		signs.linehl[severity[icon.name]] = ""
+		signs.numhl[severity[icon.name]] = icon.hl
 	end
+	vim.diagnostic.config({ signs = signs })
 
 	-- linters and formatters
 	local luacheck = require("efmls-configs.linters.luacheck")

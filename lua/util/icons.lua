@@ -10,10 +10,17 @@ M.debugging_signs = {
 }
 
 M.diagnostic_signs = {
-	Error = " ",
-	Warn = " ",
-	Hint = "",
-	Info = "",
+  [vim.diagnostic.severity.ERROR] = {name = "ERROR", text = " ", hl = "DiagnosticError"},
+  [vim.diagnostic.severity.WARN] = {name = "WARN", text = " ", hl = "DiagnosticWarn"},
+  [vim.diagnostic.severity.HINT] = {name = "HINT", text = "",hl = "DiagnosticHint"},
+  [vim.diagnostic.severity.INFO] = {name = "INFO", text = "", hl = "DiagnosticInfo"},
+
 }
+
+-- 	Error = " ",
+-- 	Warn = " ",
+-- 	Hint = "",
+-- 	Info = "",
+-- }
 
 return M
