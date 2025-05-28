@@ -30,7 +30,7 @@ return {
       local version = vim.version()
       local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
-      return "        " .. datetime .. " -- NVIM Ver:" .. nvim_version_info
+      return datetime .. " -- NVIM Ver:" .. nvim_version_info
     end
 
 
@@ -60,7 +60,7 @@ return {
       dashboard.button("fg", " [f]ind [g]rep", "<cmd>Telescope live_grep<CR>"),
       dashboard.button("u", " [u]pdate plugins", "<cmd>Lazy sync<CR>"),
       dashboard.button("i", " [i]nstall language tools", "<cmd>Mason<CR>"),
-      dashboard.button("q", "X [q]uit", "<cmd>qa<CR>"),
+      dashboard.button("q", "󱠡 [q]uit", "<cmd>qa<CR>"),
     }
     dashboard.section.footer.val = footer()
     alpha.setup(dashboard.config)
