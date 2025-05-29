@@ -6,7 +6,7 @@ return {
 	event = "BufReadPre",
 	opts = {
 		ui = {
-			border = "single",
+			border = "rounded",
 			backdrop = 60,
 			wrap = true,
 			icons = {

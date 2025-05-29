@@ -45,7 +45,7 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 local api = vim.api
 
 -- Refactoring
-api.nvim_set_keymap("n", "<leader>r", "<cmd>Lspsaga rename<CR>", { noremap = true, silent = true })
+-- api.nvim_set_keymap("n", "<leader>r", "<cmd>Lspsaga rename<CR>", { noremap = true, silent = true })
 
 -- Comments
 

@@ -6,13 +6,11 @@ local opts = {
 		"efm",
 		"bashls",
 		"ts_ls",
-		--	"solidity",
 		"tailwindcss",
 		"pyright",
 		"lua_ls",
 		"emmet_ls",
 		"jsonls",
-		--	"clangd",
 	},
 
 	automatic_installation = true,

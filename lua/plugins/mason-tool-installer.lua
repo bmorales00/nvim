@@ -6,9 +6,6 @@ local opts = {
 		"black",
 		"debugpy",
 		"flake8",
-		"isort",
-		"mypy",
-		"pylint",
 	},
 }
 return {
