@@ -23,14 +23,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Restore cursor to file position in previous editing session
-local return_last_pos = vim.api.nvim_create_augroup("LastPosGroup",{})
+local return_last_pos = vim.api.nvim_create_augroup("LastPosGroup", {})
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = return_last_pos,
-  callback = function(args)
-      local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-      local line_count = vim.api.nvim_buf_line_count(args.buf)
-      if mark[1] > 0 and mark[1] <= line_count then
-        vim.cmd('normal! g`"zz')
-      end
-  end,
+	group = return_last_pos,
+	callback = function(args)
+		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+		local line_count = vim.api.nvim_buf_line_count(args.buf)
+		if mark[1] > 0 and mark[1] <= line_count then
+			vim.cmd('normal! g`"zz')
+		end
+	end,
 })
