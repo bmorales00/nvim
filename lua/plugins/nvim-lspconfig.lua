@@ -10,12 +10,13 @@ local config = function()
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
 	local capabilities = cmp_nvim_lsp.default_capabilities()
 
-  lspconfig.bashls.setup({
-    capabilities=capabilities,
-    on_attach=on_attach,
-  })
+	lspconfig.bashls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = { "sh", "aliasrc" },
+	})
 
-	--lua
+	----------------------------------- lua
 	lspconfig.lua_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -34,7 +35,7 @@ local config = function()
 			},
 		},
 	})
-	-- typescript
+	----------------------------------- typescript
 	lspconfig.ts_ls.setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
@@ -44,7 +45,7 @@ local config = function()
 		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "git"),
 	})
 
-	--python
+	--------------------------------------- python
 
 	lspconfig.pyright.setup({
 		capabilities = capabilities,
@@ -63,7 +64,7 @@ local config = function()
 		},
 	})
 
-	-- css,sass,scss,html
+	------------------------------------------ css,sass,scss,html
 	lspconfig.emmet_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -76,7 +77,7 @@ local config = function()
 		},
 	})
 
-	-- HTML LSP | npm vscode-langservers-extracted needed
+	-------------------------------- HTML LSP | npm vscode-langservers-extracted needed
 	lspconfig.html.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -98,7 +99,7 @@ local config = function()
 		},
 	})
 
-	-- Java LSP
+	------------------------------------------------ Java LSP
 	lspconfig.jdtls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -137,7 +138,6 @@ local config = function()
 	local flake8 = require("efmls-configs.linters.flake8")
 	local black = require("efmls-configs.formatters.black")
 	local eslint_d = require("efmls-configs.linters.eslint_d")
-	--local prettier = require("efmls-configs.formatters.prettier")
 	local prettier_d = require("efmls-configs.formatters.prettier_d")
 
 	-- configure efm server
@@ -172,7 +172,7 @@ local config = function()
 		},
 	})
 
-	-- angular ls
+	------------------------------------------------------------  angular ls
 	local ok, mason_registry = pcall(require, "mason-registry")
 	if not ok then
 		vim.notify("mason-registry could not be loaded")
@@ -200,6 +200,7 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
+  event = {'BufReadPost', 'BufNewFile'},
 	config = config,
 	lazy = false,
 	dependencies = {
