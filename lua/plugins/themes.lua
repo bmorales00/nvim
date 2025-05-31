@@ -45,4 +45,18 @@ return {
 			vim.cmd("colorscheme mellifluous")
 		end,
 	},
+
+  --------------------------------- Black Metal -----------------------------------------------
+  -- {
+  --   "metalelf0/black-metal-theme-neovim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("black-metal").setup({
+  --       theme = "bathory",
+  --       -- optional configuration here
+  --     })
+  --     require("black-metal").load()
+  --   end,
+  -- },
 }
