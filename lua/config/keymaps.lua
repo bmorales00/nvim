@@ -36,7 +36,7 @@ mapkey("<C-Left>", "vertical resize +2", "n")
 mapkey("<C-Right>", "vertical resize -2", "n")
 
 -- Show Full File-Path
-mapkey("<leader>pa", "ShowPath", "n") -- Show Full File Path
+mapkey("<leader>pa", "file", "n") -- Show Full File Path
 
 -- Indenting
 vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true })
@@ -44,8 +44,10 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 
 local api = vim.api
 
--- Refactoring
--- api.nvim_set_keymap("n", "<leader>r", "<cmd>Lspsaga rename<CR>", { noremap = true, silent = true })
+-- Escaping vim modes
+vim.api.nvim_set_keymap("i", "jj", "<ESC>", {noremap = false})
+vim.api.nvim_set_keymap("v", "jj", "<ESC>", {noremap = false})
+
 
 -- Comments
 
