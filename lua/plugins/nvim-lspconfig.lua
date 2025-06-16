@@ -168,6 +168,7 @@ local config = function()
 				typescript = { eslint_d, prettier_d },
 				html = { prettier_d },
 				css = { prettier_d },
+        markdown = {prettier_d},
 			},
 		},
 	})
