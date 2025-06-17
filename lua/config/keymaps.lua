@@ -45,9 +45,8 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 local api = vim.api
 
 -- Escaping vim modes
-vim.api.nvim_set_keymap("i", "jj", "<ESC>", {noremap = false})
-vim.api.nvim_set_keymap("v", "jj", "<ESC>", {noremap = false})
-
+vim.api.nvim_set_keymap("i", "jk", "<ESC>", { noremap = false })
+vim.api.nvim_set_keymap("v", "jk", "<ESC>", { noremap = false })
 
 -- Comments
 
