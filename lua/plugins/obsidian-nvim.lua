@@ -25,8 +25,27 @@ return {
         name = "MyVault",
         path = "~/Desktop/MyVault",
       },
+      {
+        name = "buf-parent",
+        path = function ()
+          return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+        end,
+      },
     },
 
-    -- see below for full list of options 👇
+    completion = {
+      nvim_cmp = true,
+      min_chars = 2,
+    },
+
+    ---@param url string
+    follow_url_func = function(url)
+      vim.fn.jobstart({"xdg-open", url})
+    end,
+
+    statusline = {
+    enabled = true,
+    format = "{{properties}} properties {{backlinks}} backlinks {{words}} words {{chars}} chars",
+    },
   },
 }
