@@ -83,7 +83,13 @@ local config = function()
 		on_attach = on_attach,
     init_options={
       provideFormatter = true,
-    }
+    },
+    filetypes = {
+      "htmlangular",
+      "html",
+      ".git",
+    },
+
 	})
 
 	lspconfig.cssls.setup({
