@@ -81,9 +81,9 @@ local config = function()
 	lspconfig.html.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-		init_options = {
-			provideFormatter = true,
-		},
+    init_options={
+      provideFormatter = true,
+    }
 	})
 
 	lspconfig.cssls.setup({
@@ -178,10 +178,11 @@ local config = function()
 
 	------------------------------------------------------------  angular ls
 
-	lspconfig.angularls.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-	})
+	-- lspconfig.angularls.setup({
+		-- capabilities = capabilities,
+		-- on_attach = on_attach,
+	-- })
+
 end
 
 return {
