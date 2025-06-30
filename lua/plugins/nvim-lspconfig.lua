@@ -6,9 +6,11 @@ local severity = vim.diagnostic.severity
 local config = function()
 	require("neoconf").setup({})
 
-	local lspconfig = require("lspconfig")
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
+	local lspconfig = require("lspconfig")
 	local capabilities = cmp_nvim_lsp.default_capabilities()
+
+	--------------------------------- bash
 
 	lspconfig.bashls.setup({
 		capabilities = capabilities,
@@ -29,12 +31,20 @@ local config = function()
 					library = {
 						vim.fn.expand("$VIMRUNTIME/lua"),
 						vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/lua",
-						vim.fn.stdpath("config") .. "/lua",
+						-- vim.fn.stdpath("config") .. "/lua",
 					},
 				},
 			},
 		},
 	})
+
+	---------------------------------- json
+	lspconfig.jsonls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = { "json", "jsonc" },
+	})
+
 	----------------------------------- typescript
 	lspconfig.ts_ls.setup({
 		on_attach = on_attach,
@@ -81,15 +91,14 @@ local config = function()
 	lspconfig.html.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-    init_options={
-      provideFormatter = true,
-    },
-    filetypes = {
-      "htmlangular",
-      "html",
-      ".git",
-    },
-
+		init_options = {
+			provideFormatter = true,
+		},
+		filetypes = {
+			"htmlangular",
+			"html",
+			".git",
+		},
 	})
 
 	lspconfig.cssls.setup({
@@ -185,15 +194,14 @@ local config = function()
 	------------------------------------------------------------  angular ls
 
 	-- lspconfig.angularls.setup({
-		-- capabilities = capabilities,
-		-- on_attach = on_attach,
+	-- capabilities = capabilities,
+	-- on_attach = on_attach,
 	-- })
-
 end
 
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPost", "BufNewFile" },
+	-- event = { "BufReadPost", "BufNewFile" },
 	config = config,
 	lazy = false,
 	dependencies = {
