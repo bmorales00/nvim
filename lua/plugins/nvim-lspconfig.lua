@@ -8,7 +8,12 @@ local config = function()
 
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
 	local lspconfig = require("lspconfig")
+	local util = require("lspconfig.util")
 	local capabilities = cmp_nvim_lsp.default_capabilities()
+
+	local function is_angular_project(fname) --helper function to find patter file in parent root
+		return util.root_pattern("angular.json")(fname)
+	end
 
 	--------------------------------- bash
 
@@ -31,7 +36,6 @@ local config = function()
 					library = {
 						vim.fn.expand("$VIMRUNTIME/lua"),
 						vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/lua",
-						-- vim.fn.stdpath("config") .. "/lua",
 					},
 				},
 			},
@@ -52,7 +56,12 @@ local config = function()
 		filetypes = {
 			"typescript",
 		},
-		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git", "angular.json"),
+		root_dir = function(fname) -- determines startup based on if angular.json is found in root
+			if is_angular_project(fname) then
+				return nil
+			end
+			return util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
+		end,
 	})
 
 	--------------------------------------- python
@@ -85,6 +94,12 @@ local config = function()
 			"less",
 			"html",
 		},
+		root_dir = function(fname) -- determines startup based on if angular.json is found in root
+			if is_angular_project(fname) then
+				return nil
+			end
+			return util.root_pattern(".git")(fname)
+		end,
 	})
 
 	-------------------------------- HTML LSP
@@ -101,6 +116,12 @@ local config = function()
 			embeddedLanguages = { css = true, typescript = true },
 			configurationSection = { "html", "css" },
 		},
+		root_dir = function(fname) -- determines startup based on if angular.json is found in root
+			if is_angular_project(fname) then
+				return nil
+			end
+			return util.root_pattern(".git")(fname)
+		end,
 	})
 
 	------------------------------------------ cssls
@@ -143,7 +164,7 @@ local config = function()
 		capabilities = capabilities,
 		on_attach = on_attach,
 		filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
-		root_dir = require("lspconfig.util").root_pattern("angular.json"),
+		root_dir = util.root_pattern("angular.json"),
 	})
 
 	--------------------------------------------------------------------------------------------------
