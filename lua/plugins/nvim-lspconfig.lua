@@ -52,7 +52,7 @@ local config = function()
 		filetypes = {
 			"typescript",
 		},
-		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "git"),
+		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git", "angular.json"),
 	})
 
 	--------------------------------------- python
@@ -74,7 +74,7 @@ local config = function()
 		},
 	})
 
-	------------------------------------------ css,sass,scss,html
+	------------------------------------------ emmetls
 	lspconfig.emmet_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -89,18 +89,21 @@ local config = function()
 
 	-------------------------------- HTML LSP
 	lspconfig.html.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		init_options = {
-			provideFormatter = true,
-		},
 		filetypes = {
 			"htmlangular",
 			"html",
-			".git",
+		},
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {},
+		init_options = {
+			provideFormatter = true,
+			embeddedLanguages = { css = true, typescript = true },
+			configurationSection = { "html", "css" },
 		},
 	})
 
+	------------------------------------------ cssls
 	lspconfig.cssls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -133,6 +136,17 @@ local config = function()
 			},
 		},
 	})
+
+	-----------------------------------------------------  angular ls
+
+	lspconfig.angularls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
+		root_dir = require("lspconfig.util").root_pattern("angular.json"),
+	})
+
+	--------------------------------------------------------------------------------------------------
 
 	-- icon display
 	local signs = {
@@ -167,7 +181,7 @@ local config = function()
 			"typescript",
 			"json",
 			"jsonc",
-			"html",
+			-- "html",
 			"css",
 			"markdown",
 		},
@@ -184,24 +198,17 @@ local config = function()
 				lua = { luacheck, stylua },
 				python = { flake8, black },
 				typescript = { eslint_d, prettier_d },
-				html = { prettier_d },
+				-- html = { prettier_d },
 				css = { prettier_d },
 				markdown = { prettier_d },
 			},
 		},
 	})
-
-	------------------------------------------------------------  angular ls
-
-	-- lspconfig.angularls.setup({
-	-- capabilities = capabilities,
-	-- on_attach = on_attach,
-	-- })
 end
 
 return {
 	"neovim/nvim-lspconfig",
-	-- event = { "BufReadPost", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	config = config,
 	lazy = false,
 	dependencies = {

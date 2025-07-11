@@ -45,9 +45,9 @@ local opts = {
 	change_detection = {
 		notify = false,
 	},
-  ui = {
-    border = "rounded",
-  },
+	ui = {
+		border = "rounded",
+	},
 }
 
 require("lazy").setup(plugins, opts)

@@ -11,9 +11,9 @@ return {
 			view = {
 				adaptive_size = true,
 			},
-      git = {
-        ignore = false,
-      }
+			git = {
+				ignore = false,
+			},
 		})
 	end,
 }
