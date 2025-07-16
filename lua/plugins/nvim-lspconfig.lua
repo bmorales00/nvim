@@ -60,7 +60,7 @@ local config = function()
 			if is_angular_project(fname) then
 				return nil
 			end
-			return util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
+			return util.root_pattern("tsconfig.json", "package.json", ".git")(fname)
 		end,
 	})
 
