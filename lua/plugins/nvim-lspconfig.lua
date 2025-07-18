@@ -56,12 +56,6 @@ local config = function()
 		filetypes = {
 			"typescript",
 		},
-		root_dir = function(fname) -- determines startup based on if angular.json is found in root
-			if is_angular_project(fname) then
-				return nil
-			end
-			return util.root_pattern("tsconfig.json", "package.json", ".git")(fname)
-		end,
 	})
 
 	--------------------------------------- python
@@ -94,12 +88,6 @@ local config = function()
 			"less",
 			"html",
 		},
-		root_dir = function(fname) -- determines startup based on if angular.json is found in root
-			if is_angular_project(fname) then
-				return nil
-			end
-			return util.root_pattern(".git")(fname)
-		end,
 	})
 
 	-------------------------------- HTML LSP
@@ -116,12 +104,6 @@ local config = function()
 			embeddedLanguages = { css = true, typescript = true },
 			configurationSection = { "html", "css" },
 		},
-		root_dir = function(fname) -- determines startup based on if angular.json is found in root
-			if is_angular_project(fname) then
-				return nil
-			end
-			return util.root_pattern(".git")(fname)
-		end,
 	})
 
 	------------------------------------------ cssls
@@ -196,15 +178,18 @@ local config = function()
 	-- configure efm server
 
 	lspconfig.efm.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
 		filetypes = {
 			"lua",
 			"python",
 			"typescript",
 			"json",
 			"jsonc",
-			-- "html",
+			"html",
 			"css",
 			"markdown",
+			"htmlangular",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -219,7 +204,8 @@ local config = function()
 				lua = { luacheck, stylua },
 				python = { flake8, black },
 				typescript = { eslint_d, prettier_d },
-				-- html = { prettier_d },
+				html = { prettier_d },
+				htmlangular = { prettier_d },
 				css = { prettier_d },
 				markdown = { prettier_d },
 			},
