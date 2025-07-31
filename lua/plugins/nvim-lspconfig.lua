@@ -127,6 +127,13 @@ local config = function()
 	lspconfig.tailwindcss.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
+    settings={
+      tailwindCSS={
+        experimental={
+          configFile="src/styles.scss", -- This is to allow intellisense to operate on V4
+        }, -- main path to css/scss file that contains @import "tailwindcss"
+      },
+    },
 		filetypes = {
 			"templ",
 			"typescript",
