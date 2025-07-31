@@ -13,6 +13,7 @@ local opts = {
 		"lua_ls",
 		"emmet_ls",
 		"jsonls",
+		"marksman",
 	},
 
 	automatic_installation = true,

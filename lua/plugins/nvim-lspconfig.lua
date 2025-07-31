@@ -107,19 +107,32 @@ local config = function()
 	})
 
 	------------------------------------------ cssls
-	lspconfig.cssls.setup({
+	-- lspconfig.cssls.setup({
+	-- 	capabilities = capabilities,
+	-- 	on_attach = on_attach,
+	-- 	settings = {
+	-- 		css = {
+	-- 			validate = true,
+	-- 		},
+	-- 		scss = {
+	-- 			validate = true,
+	-- 		},
+	-- 		less = {
+	-- 			validate = true,
+	-- 		},
+	-- 	},
+	-- })
+	--
+	------------------------------------------ tailwindcss
+	lspconfig.tailwindcss.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-		settings = {
-			css = {
-				validate = true,
-			},
-			scss = {
-				validate = true,
-			},
-			less = {
-				validate = true,
-			},
+		filetypes = {
+			"templ",
+			"typescript",
+			"javascript",
+			"html",
+			"htmlangular",
 		},
 	})
 
@@ -147,6 +160,15 @@ local config = function()
 		on_attach = on_attach,
 		filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
 		root_dir = util.root_pattern("angular.json"),
+	})
+
+	-----------------------------------------------------  markdown
+
+	lspconfig.marksman.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = { "markdown", "markdown.mdx" },
+		root_markers = { ".marksman.toml", ".git" },
 	})
 
 	--------------------------------------------------------------------------------------------------
@@ -187,7 +209,7 @@ local config = function()
 			"json",
 			"jsonc",
 			"html",
-			"css",
+			-- "css",
 			"markdown",
 			"htmlangular",
 		},
@@ -206,7 +228,7 @@ local config = function()
 				typescript = { eslint_d, prettier_d },
 				html = { prettier_d },
 				htmlangular = { prettier_d },
-				css = { prettier_d },
+				-- css = { prettier_d },
 				markdown = { prettier_d },
 			},
 		},
