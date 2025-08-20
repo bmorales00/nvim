@@ -15,8 +15,10 @@ return {
 		-- Required.
 		"nvim-lua/plenary.nvim",
 		"MeanderingProgrammer/render-markdown.nvim",
-    "hrsh7th/nvim-cmp",
-    "nvim-telescope/telescope.nvim",
+		"hrsh7th/nvim-cmp",
+		"nvim-telescope/telescope.nvim",
+    "folke/snacks.nvim",
+
 
 		-- see below for full list of optional dependencies 👇
 	},
@@ -49,6 +51,9 @@ return {
 		statusline = {
 			enabled = true,
 			format = "{{properties}} properties {{backlinks}} backlinks {{words}} words {{chars}} chars",
+		},
+		attachments = {
+			img_folder = "./folder-name",
 		},
 	},
 }
