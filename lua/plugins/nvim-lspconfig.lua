@@ -127,13 +127,13 @@ local config = function()
 	lspconfig.tailwindcss.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-    settings={
-      tailwindCSS={
-        experimental={
-          configFile="src/styles.scss", -- This is to allow intellisense to operate on V4
-        }, -- main path to css/scss file that contains @import "tailwindcss"
-      },
-    },
+		settings = {
+			tailwindCSS = {
+				experimental = {
+					configFile = "src/styles.scss", -- This is to allow intellisense to operate on V4
+				}, -- main path to css/scss file that contains @import "tailwindcss"
+			},
+		},
 		filetypes = {
 			"templ",
 			"typescript",
@@ -144,23 +144,25 @@ local config = function()
 	})
 
 	------------------------------------------------ Java LSP
-	lspconfig.jdtls.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		settings = {
-			java = {
-				configuration = {
-					runtimes = {
-						name = "JavaSE-21",
-						path = "/opt/jdk-21",
-						default = true,
-					},
-				},
-			},
-		},
-	})
-
-	-----------------------------------------------------  angular ls
+	--- Can uncomment whenever I need to setup/use Java
+	---
+	-- lspconfig.jdtls.setup({
+	-- 	capabilities = capabilities,
+	-- 	on_attach = on_attach,
+	-- 	settings = {
+	-- 		java = {
+	-- 			configuration = {
+	-- 				runtimes = {
+	-- 					name = "JavaSE-21",
+	-- 					path = "/opt/jdk-21",
+	-- 					default = true,
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 	},
+	-- })
+	--
+	-- -----------------------------------------------------  angular ls
 
 	lspconfig.angularls.setup({
 		capabilities = capabilities,
@@ -178,7 +180,29 @@ local config = function()
 		root_markers = { ".marksman.toml", ".git" },
 	})
 
-	--------------------------------------------------------------------------------------------------
+	-----------------------------------------------------  harper language server
+
+	lspconfig.harper_ls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		enabled = true,
+		filetypes = {
+			"markdown",
+		},
+		settings = {
+			["harper-ls"] = {
+				userDictPath = "~/dict.txt",
+				linters = {
+					ToDoHyphen = false,
+					SpellCheck = true,
+				},
+				-- isolateEnglish = true,
+				diagnosticSeverity = "hint",
+			},
+		},
+	})
+
+	----------------------------------------- Diagnostic Icons
 
 	-- icon display
 	local signs = {
@@ -194,7 +218,16 @@ local config = function()
 		signs.linehl[severity[icon.name]] = ""
 		signs.numhl[severity[icon.name]] = icon.hl
 	end
-	vim.diagnostic.config({ signs = signs })
+
+	vim.diagnostic.config({
+		signs = signs,
+		float = {
+			border = "rounded",
+		},
+		update_in_insert = true,
+	})
+
+	--------------------------------------------------------------------------------------------------
 
 	-- linters and formatters
 	local luacheck = require("efmls-configs.linters.luacheck")
