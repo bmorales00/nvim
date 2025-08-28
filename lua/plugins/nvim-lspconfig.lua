@@ -162,7 +162,8 @@ local config = function()
 	-- 	},
 	-- })
 	--
-	-- -----------------------------------------------------  angular ls
+
+	-----------------------------------------------------  angular ls
 
 	lspconfig.angularls.setup({
 		capabilities = capabilities,
@@ -233,8 +234,8 @@ local config = function()
 	-- linters and formatters
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
-	local flake8 = require("efmls-configs.linters.flake8")
-	local black = require("efmls-configs.formatters.black")
+	local ruff_lint = require("efmls-configs.linters.ruff")
+	local ruff_form = require("efmls-configs.formatters.ruff")
 	local eslint_d = require("efmls-configs.linters.eslint_d")
 	local prettier_d = require("efmls-configs.formatters.prettier_d")
 
@@ -265,7 +266,7 @@ local config = function()
 		settings = {
 			languages = {
 				lua = { luacheck, stylua },
-				python = { flake8, black },
+				python = { ruff_lint, ruff_form },
 				typescript = { eslint_d, prettier_d },
 				html = { prettier_d },
 				htmlangular = { prettier_d },
