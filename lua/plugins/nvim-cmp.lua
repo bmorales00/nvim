@@ -9,6 +9,7 @@ return {
 		require("luasnip/loaders/from_vscode").lazy_load()
 
 		vim.opt.completeopt = "menu,menuone,noselect"
+		vim.cmd("highlight Pmenu guibg=NONE")
 
 		cmp.setup({
 			snippet = {
@@ -43,11 +44,11 @@ return {
 			},
 			window = {
 				completion = {
-					border = "rounded",
+					border = "double",
 					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
 				},
 				documentation = {
-					border = "rounded",
+					border = "double",
 					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
 				},
 			},
