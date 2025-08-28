@@ -222,6 +222,7 @@ local config = function()
 	vim.diagnostic.config({
 		signs = signs,
 		float = {
+			relative = "editor",
 			border = "rounded",
 		},
 		update_in_insert = true,
