@@ -9,7 +9,7 @@ local opts = {
 		"bashls",
 		"ts_ls",
 		"tailwindcss",
-		"pyright",
+		"basedpyright",
 		"lua_ls",
 		"emmet_ls",
 		"jsonls",

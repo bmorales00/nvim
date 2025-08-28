@@ -60,11 +60,11 @@ local config = function()
 
 	--------------------------------------- python
 
-	lspconfig.pyright.setup({
+	lspconfig.basedpyright.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {
-			pyright = {
+			basedpyright = {
 				disableOrganizeImports = false,
 				analysis = {
 					useLibraryCodeForTypes = true,
