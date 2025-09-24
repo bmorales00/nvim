@@ -333,6 +333,7 @@ local config = function()
 			-- "css",
 			"markdown",
 			"htmlangular",
+      "vue",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -351,6 +352,7 @@ local config = function()
 				htmlangular = { prettier_d },
 				-- css = { prettier_d },
 				markdown = { prettier_d },
+        vue = {prettier_d},
 			},
 		},
 	})
