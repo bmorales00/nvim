@@ -209,8 +209,11 @@ local config = function()
 		settings = {
 			tailwindCSS = {
 				experimental = {
-					configFile = "src/styles.scss", -- This is to allow intellisense to operate on V4
-				}, -- main path to css/scss file that contains @import "tailwindcss"
+					configFile = "src/assets/main.css",
+					-- This is to allow intellisense to operate on V4
+					-- main path to css/scss file that contains @import "tailwindcss"
+					-- Add a path to the import tailwind file here
+				},
 			},
 		},
 		filetypes = {
@@ -219,6 +222,7 @@ local config = function()
 			"javascript",
 			"html",
 			"htmlangular",
+			"vue",
 		},
 	})
 
@@ -333,7 +337,7 @@ local config = function()
 			-- "css",
 			"markdown",
 			"htmlangular",
-      "vue",
+			"vue",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -352,7 +356,7 @@ local config = function()
 				htmlangular = { prettier_d },
 				-- css = { prettier_d },
 				markdown = { prettier_d },
-        vue = {prettier_d},
+				vue = { prettier_d },
 			},
 		},
 	})
