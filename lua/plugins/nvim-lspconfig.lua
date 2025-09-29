@@ -4,6 +4,12 @@ local diagnostic_signs = require("util.icons").diagnostic_signs
 local severity = vim.diagnostic.severity
 
 local config = function()
+	local notify = vim.notify
+	vim.notify = function(msg, level, opts)
+		if msg:match("framework.*deprecated") then return end
+		notify(msg, level, opts)
+	end
+
 	require("neoconf").setup({})
 
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
