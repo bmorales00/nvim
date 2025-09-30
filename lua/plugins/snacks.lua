@@ -12,7 +12,7 @@ return {
 				},
 			},
 			image = {
-				enable = true,
+				enabled = true,
 				doc = {
 					inline = false,
 					float = true,
