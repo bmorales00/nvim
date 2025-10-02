@@ -7,11 +7,11 @@ mapkey("<leader>bn", "bnext", "n") -- Next buffer
 mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
 mapkey("<leader>bd", "bdelete", "n") -- Del buffer
 mapkey("<leader>bb", "e #", "n") -- Switch to Other Buffer
-mapkey("<leader>`", "e #", "n") -- Switch to Other Buffer
+-- mapkey("<leader>`", "e #", "n") -- Switch to Other Buffer
 
--- Directory Navigatio}n
-mapkey("<leader>m", "NvimTreeFocus", "n")
-mapkey("<leader>e", "NvimTreeToggle", "n")
+-- Directory Navigation (File Tree)
+mapkey("<leader>e", "NvimTreeToggle", "n") -- Toggle File tree
+-- mapkey("<leader>m", "NvimTreeFocus", "n") -- Move focus to file tree
 
 -- Pane and Window Navigation
 mapkey("<C-h>", "<C-w>h", "n") -- Navigate Left
@@ -39,8 +39,8 @@ mapkey("<C-Right>", "vertical resize -2", "n")
 mapkey("<leader>pa", "file", "n") -- Show Full File Path
 
 -- Indenting
-vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true })
-vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
+vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true }) -- Indent left in v mode
+vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true }) -- Indent right in v mode
 
 local api = vim.api
 
