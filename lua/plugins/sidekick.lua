@@ -53,9 +53,9 @@ return {
       desc = "Sidekick Select Prompt",
     },
     {
-      "<leader>al",
+      "<c-.>",
       function() require("sidekick.cli").focus() end,
-      mode = { "n", "x", "t" }, -- fix : i removed i 
+      mode = { "n", "x", 'i', "t" }, -- fix : i removed i 
       desc = "Sidekick Switch Focus",
     },
     -- Example of a keybinding to open OpenCode directly
