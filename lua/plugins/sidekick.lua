@@ -1,14 +1,14 @@
-return{
-  "folke/sidekick.nvim",
-  opts = {
-    -- add any options here
-    cli = {
-      mux = {
-        backend = "tmux",
-        enabled = true,
-      },
-    },
-  },
+return {
+	"folke/sidekick.nvim",
+	opts = {
+		-- add any options here
+		cli = {
+			mux = {
+				backend = "tmux",
+				enabled = false,
+			},
+		},
+	},
   -- stylua: ignore
   keys = {
     {
@@ -53,9 +53,9 @@ return{
       desc = "Sidekick Select Prompt",
     },
     {
-      "<c-.>",
+      "<leader>al",
       function() require("sidekick.cli").focus() end,
-      mode = { "n", "x", "i", "t" },
+      mode = { "n", "x", "t" }, -- fix : i removed i 
       desc = "Sidekick Switch Focus",
     },
     -- Example of a keybinding to open OpenCode directly
