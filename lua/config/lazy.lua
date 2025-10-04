@@ -52,7 +52,7 @@ local opts = {
 		border = "rounded",
 	},
 	checker = {
-		enabled = true,
+		enabled = false, -- Notify when updates are available
 	},
 }
 
