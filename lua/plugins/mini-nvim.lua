@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-mini/mini.nvim",
 		version = false, -- Using the latest stable branch
-		lazy = true, -- Only load plugins that are needed
+		lazy = false, -- Only load plugins that are needed
 
 		-- Key Triggers for desired modules
 		keys = {
@@ -44,6 +44,7 @@ return {
 			require("mini.bufremove").setup({})
 			-- Icons
 			require("mini.icons").setup({})
+			MiniIcons.mock_nvim_web_devicons()
 		end,
 	},
 }
