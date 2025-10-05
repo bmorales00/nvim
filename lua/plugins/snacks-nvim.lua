@@ -1,18 +1,36 @@
--- lazy.nvim
+-- snack plugins for nvim
+
+local snackKeys = {
+	{
+		"<leader>z",
+		function()
+			Snacks.zen()
+		end,
+		desc = "Toggle Zen Mode",
+	},
+	{
+		"<leader>Z",
+		function()
+			Snacks.zen.zoom()
+		end,
+		desc = "Toggle Zoom",
+	},
+}
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
 	---@type snacks.Config
 	opts = {
-		-- Core Modeules
+		-- Core Modules
 		dashboard = { enabled = true },
 
 		-- QoL Modules
-		zen = { enabled = true },
+		zen = { enabled = true, backdrop = { transparent = false } },
 		indent = { enabled = true },
 
-		-- Image
+		-- Image Module
 		image = { enabled = true },
 		image = { max_height = 20, doc = { inline = false, float = true } },
 
@@ -26,4 +44,5 @@ return {
 			},
 		},
 	},
+	keys = snackKeys,
 }
