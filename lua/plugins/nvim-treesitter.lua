@@ -1,13 +1,8 @@
 -- Treesitter is a plugin that provides a better way to display syntax highlighting in Neovim.
 local config = function()
 	require("nvim-treesitter.configs").setup({
-		build = ":TSUpdate",
 		indent = {
 			enable = true,
-		},
-		event = {
-			"BufReadPre",
-			"BufNewFile",
 		},
 		ensure_installed = {
 			"rust",
@@ -31,21 +26,21 @@ local config = function()
 			"diff",
 			"c",
 			"angular",
-			--"vue",
-			--"svelte",
-			--"toml",
+			"vue",
+      "toml",
 		},
 		auto_install = true,
+    sync_install = false,
 		highlight = {
 			enable = true,
-			additional_vim_regex_highlighting = true,
+			additional_vim_regex_highlighting = false,
 		},
 		incremental_selection = {
 			enable = true,
 			keymaps = {
 				init_selection = "<C-s>",
 				node_incremental = "<C-s>",
-				scope_incremental = false,
+				scope_incremental = "<TAB>",
 				node_decremental = "<BS>",
 			},
 		},
@@ -54,6 +49,8 @@ end
 
 return {
 	"nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  event = {"BufReadPost", "BufNewFile"},
 	lazy = false,
 	config = config,
 }
