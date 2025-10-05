@@ -39,7 +39,7 @@ return {
 
 			-- Utility
 			require("mini.cursorword").setup({})
-			require("mini.indentscope").setup({})
+			require("mini.indentscope").setup({ animation = { enable = false, duration = 10, easing = "linear" } })
 			require("mini.pairs").setup({})
 			require("mini.bufremove").setup({})
 			-- Icons
