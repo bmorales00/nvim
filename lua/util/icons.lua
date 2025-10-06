@@ -1,6 +1,13 @@
 -- Icons for the DAP and LSP
 local M = {}
 
+local diagnostic_signs = {
+	Error = " ",
+	Warn = " ",
+	Hint = "",
+	Info = "",
+}
+
 M.debugging_signs = {
 	Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
 	Breakpoint = " ",
@@ -9,18 +16,18 @@ M.debugging_signs = {
 	LogPoint = ".>",
 }
 
-M.diagnostic_signs = {
-  [vim.diagnostic.severity.ERROR] = {name = "ERROR", text = " ", hl = "DiagnosticError"},
-  [vim.diagnostic.severity.WARN] = {name = "WARN", text = " ", hl = "DiagnosticWarn"},
-  [vim.diagnostic.severity.HINT] = {name = "HINT", text = "",hl = "DiagnosticHint"},
-  [vim.diagnostic.severity.INFO] = {name = "INFO", text = "", hl = "DiagnosticInfo"},
-
-}
-
--- 	Error = " ",
--- 	Warn = " ",
--- 	Hint = "",
--- 	Info = "",
--- }
+M.setup = function ()
+  vim.diagnostic.config({
+    signs = { 
+      text = {
+        [vim.diagnostic.severity.ERROR] = diagnostic_signs.Error,
+        [vim.diagnostic.severity.WARN] = diagnostic_signs.Warn,
+        [vim.diagnostic.severity.HINT] = diagnostic_signs.Hint,
+        [vim.diagnostic.severity.INFO] = diagnostic_signs.Info,
+      },
+    },
+  })
+ 
+end
 
 return M

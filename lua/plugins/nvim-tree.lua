@@ -2,6 +2,7 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	lazy = false,
+	dependencies = { "mini.nvim" },
 	config = function()
 		vim.cmd([[hi NvimTreeNormal guibg=NONE ctermbg=NONE]])
 		require("nvim-tree").setup({
