@@ -1,5 +1,7 @@
+local on_attach = require("util.lsp").on_attach
+
 -- Auto-Format on Save
-local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
+local lsp_fmt_group = vim.api.nvim_create_augroup("FormatOnSaveGroup", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = lsp_fmt_group,
 	callback = function()
@@ -37,4 +39,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 			vim.cmd('normal! g`"zz')
 		end
 	end,
+})
+
+-- on attach function
+local lsp_on_attach_group = vim.api.nvim_create_augroup("LspMappings", {})
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = lsp_on_attach_group,
+  callback = on_attach,
 })
