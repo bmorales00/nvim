@@ -25,13 +25,8 @@ require("config.autocmds")
 
 local plugins = "plugins"
 
-local opts = {
-	defaults = {
-		lazy = true,
-	},
-	install = {
-		colorscheme = { "mellifluous" },
-	},
+require("lazy").setup({
+	spec = { { import = plugins } },
 	rtp = {
 		disabled_plugins = {
 			"gzip",
@@ -45,15 +40,6 @@ local opts = {
 			"zipPlugin",
 		},
 	},
-	change_detection = {
-		notify = false,
-	},
-	ui = {
-		border = "rounded",
-	},
-	checker = {
-		enabled = false, -- Notify when updates are available
-	},
-}
-
-require("lazy").setup(plugins, opts)
+	install = { colorscheme = { "mellifluous" } },
+	checker = { enabled = false },
+})
