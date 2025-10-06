@@ -13,7 +13,7 @@ require("lsp.jsonls")(capabilities)
 require("lsp.lua_ls")(capabilities)
 require("lsp.marksman")(capabilities)
 require("lsp.tailwindcss")(capabilities)
-require("lsp.volar")(capabilities)
+require("lsp.vue_ls")(capabilities)
 require("lsp.vtsls")(capabilities)
 
 -- Linter and Formatters
@@ -32,7 +32,7 @@ vim.lsp.enable({
   'lua_ls',
   'marksman',
   'tailwindcss',
-  'volar',
+  'vue_ls',
   'vtsls',
   'efm',
 })

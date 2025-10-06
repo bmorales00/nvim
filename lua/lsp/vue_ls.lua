@@ -1,12 +1,12 @@
 --- works in hybrid mode alongside vtsls
 --- When you are editing the <script> block of a .vue file,
 --- Volar forwards the code and your actions (like asking for autocompletion)
---- to the vtsls server. vtsls processes it and sends the result back to Volar, which then displays it in your editor.
+--- to the vtsls server. vtsls processes it and sends the result back to Vue_ls, which then displays it in your editor.
 
 --- @param capabilities table LSP client capabilities (for nvim-cmp or something similar)
 --- @return nil
 return function(capabilities)
-	vim.lsp.config("volar", {
+	vim.lsp.config("vue_ls", {
 		capabilities = capabilities,
 		on_init = function(client)
 			client.handlers["tsserver/request"] = function(_, result, context)
