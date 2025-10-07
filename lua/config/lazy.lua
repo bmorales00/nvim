@@ -42,4 +42,5 @@ require("lazy").setup({
 	},
 	install = { colorscheme = { "mellifluous" } },
 	checker = { enabled = false },
+  ui = {border = "rounded"},
 })
