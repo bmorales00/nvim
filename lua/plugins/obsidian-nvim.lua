@@ -11,43 +11,37 @@ return {
 	--   "BufNewFile path/to/my-vault/*.md",
 	-- },
 	---@module 'obsidian'
-	---@type obsidian.config
-	opts = {
-		workspaces = {
-			{
-				name = "MyVault",
-				path = "~/Desktop/MyVault",
-			},
-			{
-				name = "buf-parent",
-				path = function()
-					return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-				end,
-			},
-		},
-
-		completion = {
-			nvim_cmp = true,
-			min_chars = 1,
-		},
-
-		---@param url string
-		follow_url_func = function(url)
-			vim.fn.jobstart({ "xdg-open", url })
-		end,
-
-		statusline = {
-			enabled = true,
-			format = "{{properties}} properties {{backlinks}} backlinks {{words}} words {{chars}} chars",
-		},
-		attachments = {
-			img_folder = "./folder-name",
-		},
-	},
 	config = function()
 		require("obsidian").setup({
-			ui = { enable = false },
-			footer = { enabled = false, seperator = false },
+			workspaces = {
+				{
+					name = "MyVault",
+					path = vim.fn.expand("~") .. "/Desktop/MyVault",
+				},
+				{
+					name = "buf-parent",
+					path = function()
+						return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+					end,
+				},
+			},
+			ui = { enabled = false },
+			legacy_commands = false,
+
+			attachments = {
+				img_folder = "./folder-name",
+			},
+
+			---@param url string
+			follow_url_func = function(url)
+				vim.fn.jobstart({ "xdg-open", url })
+			end,
+
+			completion = {
+				nvim_cmp = true,
+				min_chars = 1,
+			},
+			lsp = false,
 		})
 	end,
 }
