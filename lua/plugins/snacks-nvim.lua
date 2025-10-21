@@ -43,7 +43,7 @@ return {
 			},
 			zen = {
 				minimal = false,
-				backdrop = { transparent = true, blend = 40 },
+				backdrop = { transparent = false, blend = 40 },
 			},
 		},
 	},
