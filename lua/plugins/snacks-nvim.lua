@@ -27,12 +27,11 @@ return {
 		dashboard = { enabled = true },
 
 		-- QoL Modules
-		zen = { enabled = true, backdrop = { transparent = false } },
+		zen = { enabled = true },
 		indent = { enabled = true },
 
 		-- Image Module
-		image = { enabled = true },
-		image = { max_height = 20, doc = { inline = false, float = true } },
+		image = { enabled = true, max_height = 20, doc = { inline = false, float = true } },
 
 		-- Styles for modules
 		styles = {
@@ -41,6 +40,10 @@ return {
 				col = -1,
 				row = -1,
 				border = "rounded",
+			},
+			zen = {
+				minimal = false,
+				backdrop = { transparent = true, blend = 40 },
 			},
 		},
 	},
