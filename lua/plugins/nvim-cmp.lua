@@ -37,15 +37,20 @@ return {
 			}),
 			-- configure lspkind for vs-code like icons
 			formatting = {
+        fields={"abbr", "kind" ,"menu"},
 				format = lspkind.cmp_format({
+					mode = "symbol_text",
 					maxwidth = 50,
 					ellipsis_char = "...",
+					show_labelDetails = true,
 				}),
 			},
 			window = {
 				completion = {
 					border = "double",
 					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+					col_offset = -3,
+					side_padding = 0,
 				},
 				documentation = {
 					border = "double",
@@ -56,6 +61,12 @@ return {
 	end,
 	dependencies = {
 		"onsails/lspkind.nvim",
+		"neovim/nvim-lspconfig",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/nvim-cmp",
+		"saadparwaiz1/cmp_luasnip",
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = { "rafamadriz/friendly-snippets" },
