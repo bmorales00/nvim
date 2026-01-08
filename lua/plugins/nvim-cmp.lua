@@ -37,7 +37,7 @@ return {
 			}),
 			-- configure lspkind for vs-code like icons
 			formatting = {
-        fields={"abbr", "kind" ,"menu"},
+				fields = { "abbr", "kind", "menu" },
 				format = lspkind.cmp_format({
 					mode = "symbol_text",
 					maxwidth = 50,
@@ -48,7 +48,7 @@ return {
 			window = {
 				completion = {
 					border = "double",
-					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+					winhighlight = "Normal:Pmenu,CursorLine:CmpNormal,FloatBorder:Pmenu,Search:None",
 					col_offset = -3,
 					side_padding = 0,
 				},
