@@ -15,12 +15,14 @@ require("lsp.marksman")(capabilities)
 require("lsp.tailwindcss")(capabilities)
 require("lsp.vue_ls")(capabilities)
 require("lsp.vtsls")(capabilities)
+require("lsp.clangd")(capabilities)
 
 -- Linter and Formatters
 require("lsp.efm")(capabilities)
 
 vim.lsp.enable({
   'angularls',
+  'clangd',
   'basedpyright',
   'bashls',
   'cssls',

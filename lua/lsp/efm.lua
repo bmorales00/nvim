@@ -14,11 +14,12 @@ return function(capabilities)
 	vim.lsp.config("efm", {
 		capabilities = capabilities,
 		filetypes = {
+      "c",
 			"css",
 			"html",
 			"htmlangular",
 			"lua",
-			-- "markdown",
+			"markdown",
 			"python",
 			"sh",
 			"typescript",
