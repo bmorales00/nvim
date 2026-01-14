@@ -4,9 +4,10 @@ return {
 		-- add any options here
 		cli = {
 			mux = {
+        enabled = true,
 				backend = "tmux",
-				enabled = true,
 			},
+      create="window",
 		},
 	},
   -- stylua: ignore
@@ -53,9 +54,14 @@ return {
       desc = "Sidekick Select Prompt",
     },
     {
+      "<leader>ao",
+      function() require("sidekick.cli").close() end,
+      desc = "Detach a CLI Session",
+    },
+    {
       "<c-.>",
       function() require("sidekick.cli").focus() end,
-      mode = { "n", "x", 'i', "t" }, -- fix : i removed i 
+      mode = { "n", "x", 'i', "t" }, -- fix : i removed i
       desc = "Sidekick Switch Focus",
     },
     -- Example of a keybinding to open OpenCode directly
