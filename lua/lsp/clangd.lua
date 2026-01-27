@@ -5,7 +5,9 @@ return function(capabilities)
 		capabilities = capabilities,
 		root_markers = {
 			".clangd",
-			".clang-tidy",
+      "--clang-tidy",
+			"--completion-style=detailed",
+			"--background-index",
 			".clang-format",
 			"compile_commands.json",
 			"compile_flags.txt",
