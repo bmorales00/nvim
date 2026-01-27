@@ -40,7 +40,7 @@ require("lazy").setup({
 			"zipPlugin",
 		},
 	},
-	install = { colorscheme = { "mellifluous" } },
+	install = { colorscheme = { "lackluster" } },
 	checker = { enabled = false },
-  ui = {border = "rounded"},
+	ui = { border = "rounded" },
 })
