@@ -86,5 +86,7 @@ return {
 		-- vim.cmd.colorscheme("lackluster")
 		-- vim.cmd.colorscheme("lackluster-mint")
 		vim.cmd.colorscheme("lackluster-hack") -- my favorite
+		vim.api.nvim_set_hl(0, "NvimTreeFolderName", { fg = lackluster.color.lack })
+		vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName", { fg = lackluster.color.luster })
 	end,
 }
