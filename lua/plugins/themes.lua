@@ -57,7 +57,7 @@
 --       -- optional configuration here
 --     })
 --     require("black-metal").load()
---   end,
+  -- end,
 -- },
 --
 --
@@ -71,7 +71,7 @@ return {
 		lackluster.setup({
 			tweak_syntax = {
 				keyword = lackluster.color.green,
-				comment = require("lackluster").color.gray5, -- or gray5
+				comment = lackluster.color.gray4, -- or gray5
 			},
 			tweak_background = {
 				-- normal = "default", -- main background
@@ -82,11 +82,16 @@ return {
 				menu = "default", -- nvim_cmp, wildmenu ... (bad idea to transparent)
 				popup = "#000000", -- lazy, mason, whichkey ... (bad idea to transparent)
 			},
+			tweak_highlight = {
+				["@comment"] = {
+					italic = true,
+				},
+			},
 		})
 		-- vim.cmd.colorscheme("lackluster")
 		-- vim.cmd.colorscheme("lackluster-mint")
-		vim.cmd.colorscheme("lackluster-hack") -- my favorite
 		vim.api.nvim_set_hl(0, "NvimTreeFolderName", { fg = lackluster.color.lack })
-		vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName", { fg = lackluster.color.luster })
+		vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName", { fg = lackluster.color.lack })
+		vim.cmd.colorscheme("lackluster-hack") -- my favorite
 	end,
 }
