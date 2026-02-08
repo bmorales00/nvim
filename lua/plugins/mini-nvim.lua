@@ -33,7 +33,16 @@ return {
 		config = function()
 			-- Core
 			require("mini.ai").setup({})
-			require("mini.comment").setup({ mappings = { comment = "gc" } })
+			require("mini.comment").setup({
+				opts = {
+					options = {
+						custom_commentstring = function()
+							return require("ts_context_commentstring.internal").calculate_commentstring()
+								or vim.bo.commentstring
+						end,
+					},
+				},
+			})
 			require("mini.move").setup({})
 			require("mini.surround").setup({})
 
@@ -45,5 +54,9 @@ return {
 			require("mini.icons").setup({})
 			MiniIcons.mock_nvim_web_devicons()
 		end,
+
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring", -- Dependency for Mini.Comment
+		},
 	},
 }
