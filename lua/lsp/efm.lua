@@ -14,7 +14,7 @@ return function(capabilities)
 	vim.lsp.config("efm", {
 		capabilities = capabilities,
 		filetypes = {
-      "c",
+      -- "c",
 			"css",
 			"html",
 			"htmlangular",
@@ -24,8 +24,8 @@ return function(capabilities)
 			"sh",
 			"typescript",
 			"vue",
-			-- "json",
-			-- "jsonc",
+			"json",
+			"jsonc",
 		},
 		init_options = {
 			documentFormatting = true,

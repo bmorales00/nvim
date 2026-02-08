@@ -5,13 +5,18 @@ local lsp_fmt_group = vim.api.nvim_create_augroup("FormatOnSaveGroup", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = lsp_fmt_group,
 	callback = function()
-		local efm = vim.lsp.get_clients({ name = "efm" })
+		local ft = vim.bo.filetype
+		local lsp_formatters = {
+			c = "clangd",
+		}
+		local formatter = lsp_formatters[ft] or "efm"
+		local clients = vim.lsp.get_clients({ name = formatter })
 
-		if vim.tbl_isempty(efm) then
+		if vim.tbl_isempty(clients) then
 			return
 		end
 
-		vim.lsp.buf.format({ name = "efm", async = true })
+		vim.lsp.buf.format({ name = formatter, async = true })
 	end,
 })
 
@@ -19,12 +24,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_yank_group,
-  pattern = "*",
+	pattern = "*",
 	callback = function()
-    vim.hl.on_yank({
-      higroup = "IncSearch",
-      timeout = 200
-    })
+		vim.hl.on_yank({
+			higroup = "IncSearch",
+			timeout = 200,
+		})
 	end,
 })
 
@@ -44,6 +49,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- on attach function
 local lsp_on_attach_group = vim.api.nvim_create_augroup("LspMappings", {})
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = lsp_on_attach_group,
-  callback = on_attach,
+	group = lsp_on_attach_group,
+	callback = on_attach,
 })
