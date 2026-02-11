@@ -57,7 +57,7 @@
 --       -- optional configuration here
 --     })
 --     require("black-metal").load()
-  -- end,
+-- end,
 -- },
 --
 --
