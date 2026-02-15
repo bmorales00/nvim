@@ -37,7 +37,7 @@ return {
 				},
 				size = {
 					width = 60,
-					height = 10,
+					height = "auto",
 				},
 				border = {
 					style = "rounded",

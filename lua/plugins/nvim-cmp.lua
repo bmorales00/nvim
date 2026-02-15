@@ -45,18 +45,18 @@ return {
 					show_labelDetails = true,
 				}),
 			},
-			window = {
-				completion = {
-					border = "double",
-					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-					col_offset = -3,
-					side_padding = 0,
-				},
-				documentation = {
-					border = "double",
-					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-				},
+		window = {
+			completion = {
+				border = "double",
+				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+				col_offset = -3,
+				side_padding = 0,
 			},
+			documentation = {
+				border = "double",
+				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+			},
+		},
 		})
 	end,
 	dependencies = {
