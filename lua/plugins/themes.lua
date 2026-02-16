@@ -78,7 +78,6 @@ return {
 				-- normal = "none", -- transparent
 				normal = "#000000", -- hexcode
 				-- normal = color.green, -- lackluster color
-				telescope = "#000000", -- telescope
 				menu = "default", -- nvim_cmp, wildmenu ... (bad idea to transparent)
 				popup = "#000000", -- lazy, mason, whichkey ... (bad idea to transparent)
 			},
@@ -90,8 +89,6 @@ return {
 		})
 		-- vim.cmd.colorscheme("lackluster")
 		-- vim.cmd.colorscheme("lackluster-mint")
-		vim.api.nvim_set_hl(0, "NvimTreeFolderName", { fg = lackluster.color.lack })
-		vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName", { fg = lackluster.color.lack })
 		vim.cmd.colorscheme("lackluster-hack") -- my favorite
 	end,
 }

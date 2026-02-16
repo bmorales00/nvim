@@ -9,10 +9,6 @@ mapkey("<leader>bd", "bdelete", "n") -- Del buffer
 mapkey("<leader>bb", "e #", "n") -- Switch to Other Buffer
 -- mapkey("<leader>`", "e #", "n") -- Switch to Other Buffer
 
--- Directory Navigation (File Tree)
-mapkey("<leader>e", "NvimTreeToggle", "n") -- Toggle File tree
--- mapkey("<leader>m", "NvimTreeFocus", "n") -- Move focus to file tree
-
 -- Pane and Window Navigation
 mapkey("<C-h>", "<C-w>h", "n") -- Navigate Left
 mapkey("<C-j>", "<C-w>j", "n") -- Navigate Down
