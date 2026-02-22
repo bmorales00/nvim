@@ -28,7 +28,16 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp" }, -- lsp
+				{
+					name = "nvim_lsp",
+					entry_filer = function(entry, ctx)
+						local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+						if kind == "Text" then
+							return false
+						end
+						return true
+					end,
+				}, -- lsp
 				{ name = "luasnip" }, -- snippets
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
@@ -45,18 +54,18 @@ return {
 					show_labelDetails = true,
 				}),
 			},
-		window = {
-			completion = {
-				border = "double",
-				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-				col_offset = -3,
-				side_padding = 0,
+			window = {
+				completion = {
+					border = "double",
+					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+					col_offset = -3,
+					side_padding = 0,
+				},
+				documentation = {
+					border = "double",
+					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+				},
 			},
-			documentation = {
-				border = "double",
-				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-			},
-		},
 		})
 	end,
 	dependencies = {
