@@ -29,19 +29,19 @@ return {
 			legacy_commands = false,
 
 			attachments = {
-				img_folder = "./folder-name",
+				folder = "./folder-name",
 			},
 
-			---@param url string
-			follow_url_func = function(url)
-				vim.fn.jobstart({ "xdg-open", url })
-			end,
+			-- ---@param url string
+			-- follow_url_func = function(url)
+			-- 	vim.fn.jobstart({ "xdg-open", url })
+			-- end,
 
 			completion = {
-				nvim_cmp = true,
+				blink = true,
 				min_chars = 1,
 			},
-			lsp = false,
+			lsp = true,
 		})
 	end,
 }
