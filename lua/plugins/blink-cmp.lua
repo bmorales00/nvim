@@ -12,17 +12,7 @@ return {
 	},
 
 	opts = {
-		cmdline = {
-			enabled = true,
-			keymap = {
-				preset = "cmdline",
-				-- You can add custom cmdline maps here if needed
-			},
-			completion = {
-				menu = { auto_show = false },
-				ghost_text = { enabled = true },
-			},
-		},
+		cmdline = { enabled = false },
 		snippets = { preset = "luasnip" },
 
 		-- Keymaps: matching your nvim-cmp setup
@@ -49,6 +39,7 @@ return {
 		completion = {
 			menu = {
 				border = "rounded",
+				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 				draw = {
 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 				},

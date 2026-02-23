@@ -21,13 +21,18 @@ return {
 			},
 		},
 		views = {
-			-- cmdline_popup = {
-			-- 	position = {
-			-- 		row = "40%",
-			-- 		col = "50%",
-			-- 	},
-			-- },
-
+			cmdline_popup = {
+				position = {
+					row = "40%",
+					col = "50%",
+				},
+			},
+			cmdline_popupmenu = {
+				position = {
+					row = "30",
+					col = "50%",
+				},
+			},
 			hover = {
 				border = {
 					style = "rounded",
