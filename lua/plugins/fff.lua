@@ -8,14 +8,14 @@ return {
 	-- if you are using nixos
 	-- build = "nix run .#release",
 	opts = { -- (optional)
-    prompt = '> ',
+		prompt = "> ",
 		debug = {
 			enabled = true, -- we expect your collaboration at least during the beta
 			show_scores = true, -- to help us optimize the scoring system, feel free to share your scores!
 		},
-    hl={
-      active_file="StatusLine",
-    },
+		hl = {
+			active_file = "StatusLine",
+		},
 	},
 	-- No need to lazy-load with lazy.nvim.
 	-- This plugin initializes itself lazily.
@@ -46,13 +46,19 @@ return {
 			end,
 			desc = "Live fffuzy grep",
 		},
-    {
+		{
 			"<leader>fd", -- try it if you didn't it is a banger keybinding for a picker
 			function()
-				require("fff").change_indexing_directory(vim.fn.getcwd())
+				local oil = require("oil")
+				local cwd = oil.get_current_dir() -- This returns the clean path without 'oil://'
+
+				-- Fallback if you aren't in an oil buffer
+				if not cwd then
+					cwd = vim.fn.expand("%:p:h")
+				end
+				require("fff").change_indexing_directory(cwd)
 			end,
 			desc = "FFFChange index directory",
-		}
+		},
 	},
 }
-
