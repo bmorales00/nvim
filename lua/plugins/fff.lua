@@ -46,19 +46,5 @@ return {
 			end,
 			desc = "Live fffuzy grep",
 		},
-		{
-			"<leader>fd", -- try it if you didn't it is a banger keybinding for a picker
-			function()
-				local oil = require("oil")
-				local cwd = oil.get_current_dir() -- This returns the clean path without 'oil://'
-
-				-- Fallback if you aren't in an oil buffer
-				if not cwd then
-					cwd = vim.fn.expand("%:p:h")
-				end
-				require("fff").change_indexing_directory(cwd)
-			end,
-			desc = "FFFChange index directory",
-		},
 	},
 }
