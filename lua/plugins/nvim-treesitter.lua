@@ -3,6 +3,7 @@ local config = function()
 	require("nvim-treesitter.configs").setup({
 		indent = {
 			enable = true,
+			disable = { "vue" },
 		},
 		ensure_installed = {
 			"rust",
@@ -27,10 +28,10 @@ local config = function()
 			"c",
 			"angular",
 			"vue",
-      "toml",
+			"toml",
 		},
 		auto_install = true,
-    sync_install = false,
+		sync_install = false,
 		highlight = {
 			enable = true,
 			additional_vim_regex_highlighting = false,
@@ -49,8 +50,8 @@ end
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  event = {"BufReadPost", "BufNewFile"},
+	build = ":TSUpdate",
+	event = { "BufReadPost", "BufNewFile" },
 	lazy = false,
 	config = config,
 }
