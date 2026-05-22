@@ -75,11 +75,11 @@ return {
 			},
 			tweak_background = {
 				-- normal = "default", -- main background
-				-- normal = "none", -- transparent
-				normal = "#000000", -- hexcode
+				normal = "none", -- transparent
+				-- normal = "#000000", -- hexcode
 				-- normal = color.green, -- lackluster color
-				menu = "default", -- nvim_cmp, wildmenu ... (bad idea to transparent)
-				popup = "#000000", -- lazy, mason, whichkey ... (bad idea to transparent)
+				menu = "none", -- nvim_cmp, wildmenu ... (bad idea to transparent)
+				popup = "none", -- lazy, mason, whichkey ... (bad idea to transparent)
 			},
 			tweak_highlight = {
 				["@comment"] = {
