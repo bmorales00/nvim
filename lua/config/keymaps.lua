@@ -26,6 +26,7 @@ mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 -- Window Management
 mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
 mapkey("<leader>sh", "split", "n") -- Split Horizontally
+mapkey("<leader>ss", "wincmd x", "n") -- Swap Split
 mapkey("<C-Up>", "resize +2", "n")
 mapkey("<C-Down>", "resize -2", "n")
 mapkey("<C-Left>", "vertical resize +2", "n")
