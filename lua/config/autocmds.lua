@@ -52,3 +52,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_on_attach_group,
 	callback = on_attach,
 })
+
+-- Treesitter highlighting
+local ts_group = vim.api.nvim_create_augroup("TreesitterAttach", {})
+vim.api.nvim_create_autocmd("FileType", {
+	group = ts_group,
+	pattern = {
+		"lua",
+		"python",
+		"rust",
+		"javascript",
+		"typescript",
+		"typescriptreact",
+		"html",
+		"css",
+		"json",
+		"markdown",
+		"sh",
+		"c",
+		"vim",
+		"vimdoc",
+	},
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
+})
