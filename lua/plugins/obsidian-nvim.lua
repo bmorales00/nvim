@@ -37,10 +37,6 @@ return {
 			-- 	vim.fn.jobstart({ "xdg-open", url })
 			-- end,
 
-			completion = {
-				blink = true,
-				min_chars = 1,
-			},
 			lsp = true,
 		})
 	end,
