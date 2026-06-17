@@ -28,17 +28,8 @@ return function(capabilities)
 				suggest = {
 					autoImportSuggestions = true,
 					completeFunctionCalls = true,
-					includeCompletionsForModuleExports = true,
+					includeCompletionsForModuleExports = false,
 					includeCompletionsForImportStatements = true,
-				},
-				preferences = {
-					importModuleSpecifier = "non-relative",
-					preferTypeOnlyAutoImports = true,
-				},
-			},
-			javascript = {
-				preferences = {
-					importModuleSpecifier = "non-relative",
 				},
 			},
 		},
