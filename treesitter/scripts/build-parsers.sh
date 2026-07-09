@@ -48,7 +48,7 @@ build https://github.com/tree-sitter/tree-sitter-typescript tsx tsx
 build https://github.com/tree-sitter/tree-sitter-html html
 build https://github.com/tree-sitter/tree-sitter-css css
 build https://github.com/tree-sitter/tree-sitter-json json
-
+build https://github.com/tree-sitter-grammars/tree-sitter-vue vue vue
 rm -rf "$SRC"
 echo ">>> Done. Parsers in $DST:"
 ls "$DST"
