@@ -6,16 +6,29 @@
 --- @param capabilities table LSP client capabilities (for nvim-cmp or something similar)
 --- @return nil
 return function(capabilities)
+	local tsdk_path = vim.fn.expand("$MASON/packages")
+		.. "/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib"
+
 	vim.lsp.config("vue_ls", {
 		capabilities = capabilities,
+		cmd = { "vue-language-server", "--stdio", "--tsdk=" .. tsdk_path },
 		on_init = function(client)
-			client.handlers["tsserver/request"] = function(_, result, context)
+			local retries = 0
+
+			local function typescript_handler(_, result, context)
 				local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
 				if #clients == 0 then
-					vim.notify(
-						"Could not find `vtsls` lsp client, vue_lsp will not work without it!",
-						vim.log.levels.ERROR
-					)
+					if retries <= 10 then
+						retries = retries + 1
+						vim.defer_fn(function()
+							typescript_handler(_, result, context)
+						end, 100)
+					else
+						vim.notify(
+							"Could not find `vtsls` lsp client, vue_lsp will not work without it!",
+							vim.log.levels.ERROR
+						)
+					end
 					return
 				end
 				local ts_client = clients[1]
@@ -30,11 +43,13 @@ return function(capabilities)
 						payload,
 					},
 				}, { bufnr = context.bufnr }, function(_, r)
-					local response_data = { { id, r.body } }
+					local response_data = { { id, r and r.body } }
 					---@diagnostic disable-next-line: param-type-mismatch
 					client:notify("tsserver/response", response_data)
 				end)
 			end
+
+			client.handlers["tsserver/request"] = typescript_handler
 		end,
 		----------------------------------------------------------------
 		settings = {
