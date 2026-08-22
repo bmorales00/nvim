@@ -18,7 +18,6 @@ return function(capabilities)
 			"typescript",
 			"javascript",
 			"html",
-			"htmlangular",
 			"vue",
 		},
 	})

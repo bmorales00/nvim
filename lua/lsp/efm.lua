@@ -14,10 +14,9 @@ return function(capabilities)
 	vim.lsp.config("efm", {
 		capabilities = capabilities,
 		filetypes = {
-      -- "c",
+			-- "c",
 			"css",
 			"html",
-			"htmlangular",
 			"lua",
 			"markdown",
 			"python",
@@ -39,7 +38,6 @@ return function(capabilities)
 			languages = {
 				css = { prettier_d },
 				html = { prettier_d },
-				htmlangular = { prettier_d },
 				lua = { luacheck, stylua },
 				-- markdown = { prettier_d },
 				python = { ruff_lint, ruff_form },

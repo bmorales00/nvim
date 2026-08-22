@@ -3,7 +3,7 @@
 return function(capabilities)
 	vim.lsp.config("html", {
 		capabilities = capabilities,
-		filetypes = { "html", "htmlangular" },
+		filetypes = { "html" },
 		settings = {},
 		init_options = {
 			provideFormatter = true,

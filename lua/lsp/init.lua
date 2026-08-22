@@ -1,14 +1,12 @@
 local capabilities = require("blink-cmp").get_lsp_capabilities()
 
  -- LSP
-require("lsp.angularls")(capabilities)
 require("lsp.basedpyright")(capabilities)
 require("lsp.bashls")(capabilities)
 require("lsp.cssls")(capabilities)
 require("lsp.emmet_ls")(capabilities)
 require("lsp.harper_ls")(capabilities)
 require("lsp.html")(capabilities)
-require("lsp.jdtls")(capabilities)
 require("lsp.jsonls")(capabilities)
 require("lsp.lua_ls")(capabilities)
 require("lsp.marksman")(capabilities)
@@ -21,7 +19,6 @@ require("lsp.clangd")(capabilities)
 require("lsp.efm")(capabilities)
 
 vim.lsp.enable({
-  'angularls',
   'clangd',
   'basedpyright',
   'bashls',
@@ -29,7 +26,6 @@ vim.lsp.enable({
   'emmet_ls',
   'harper_ls',
   'html',
-  -- 'jdtls', -- Enable java lsp after enabling java plugin
   'jsonls',
   'lua_ls',
   'marksman',
