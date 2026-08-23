@@ -14,11 +14,14 @@ require("lsp.tailwindcss")(capabilities)
 require("lsp.vue_ls")(capabilities)
 require("lsp.vtsls")(capabilities)
 require("lsp.clangd")(capabilities)
+require("lsp.yamlls")(capabilities)
+require("lsp.ansiblels")(capabilities)
 
 -- Linter and Formatters
 require("lsp.efm")(capabilities)
 
 vim.lsp.enable({
+	"ansiblels",
 	"clangd",
 	"basedpyright",
 	"bashls",
@@ -33,4 +36,5 @@ vim.lsp.enable({
 	"vue_ls",
 	"vtsls",
 	"efm",
+	"yamlls",
 })
