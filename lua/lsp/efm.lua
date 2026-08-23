@@ -2,7 +2,6 @@
 --- @return nil
 return function(capabilities)
 	-- linters and formatters
-	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
 	local ruff_lint = require("efmls-configs.linters.ruff")
 	local ruff_form = require("efmls-configs.formatters.ruff")
@@ -14,35 +13,40 @@ return function(capabilities)
 	vim.lsp.config("efm", {
 		capabilities = capabilities,
 		filetypes = {
-			-- "c",
 			"css",
 			"html",
-			"lua",
-			"markdown",
-			"python",
-			"sh",
-			"typescript",
-			"vue",
+			"javascript",
+			"javascriptreact",
 			"json",
 			"jsonc",
+			"less",
+			"lua",
+			"python",
+			"scss",
+			"sh",
+			"typescript",
+			"typescriptreact",
+			"vue",
 		},
 		init_options = {
 			documentFormatting = true,
 			documentRangeFormatting = true,
-			hover = true,
-			documentSymbol = true,
-			codeAction = true,
-			completion = true,
 		},
 		settings = {
 			languages = {
 				css = { prettier_d },
 				html = { prettier_d },
-				lua = { luacheck, stylua },
-				-- markdown = { prettier_d },
+				javascript = { eslint_d, prettier_d },
+				javascriptreact = { eslint_d, prettier_d },
+				json = { prettier_d },
+				jsonc = { prettier_d },
+				less = { prettier_d },
+				lua = { stylua },
 				python = { ruff_lint, ruff_form },
+				scss = { prettier_d },
 				sh = { shellcheck, shfmt },
 				typescript = { eslint_d, prettier_d },
+				typescriptreact = { eslint_d, prettier_d },
 				vue = { prettier_d },
 			},
 		},

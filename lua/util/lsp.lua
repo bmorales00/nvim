@@ -20,7 +20,7 @@ M.on_attach = function(client, bufnr)
 	keymap.set("n", "<leader>go", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts) -- list doc symbol
 
 	if client.name == "basedpyright" then
-		keymap.set("n", "<leader>oi", "<cmd>PyrightOrganizeImports<CR>", opts)
+		keymap.set("n", "<leader>oi", "<cmd>LspPyrightOrganizeImports<CR>", opts)
 	end
 end
 return M

@@ -3,11 +3,15 @@
 return function(capabilities)
 	vim.lsp.config("clangd", {
 		capabilities = capabilities,
+		cmd = {
+			"clangd",
+			"--background-index",
+			"--clang-tidy",
+			"--completion-style=detailed",
+		},
 		root_markers = {
 			".clangd",
-      "--clang-tidy",
-			"--completion-style=detailed",
-			"--background-index",
+			".clang-tidy",
 			".clang-format",
 			"compile_commands.json",
 			"compile_flags.txt",

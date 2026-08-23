@@ -1,2 +1,22 @@
 treesitter/parser/
-treesitter/queries/
+treesitter/queries/*
+
+# Keep the queries used by the native Treesitter configuration reproducible.
+!treesitter/queries/bash/
+!treesitter/queries/c/
+!treesitter/queries/css/
+!treesitter/queries/ecma/
+!treesitter/queries/html/
+!treesitter/queries/html_tags/
+!treesitter/queries/javascript/
+!treesitter/queries/json/
+!treesitter/queries/jsx/
+!treesitter/queries/lua/
+!treesitter/queries/markdown/
+!treesitter/queries/markdown_inline/
+!treesitter/queries/python/
+!treesitter/queries/tsx/
+!treesitter/queries/typescript/
+!treesitter/queries/vim/
+!treesitter/queries/vimdoc/
+!treesitter/queries/vue/

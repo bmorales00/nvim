@@ -1,10 +1,10 @@
 local capabilities = require("blink-cmp").get_lsp_capabilities()
 
- -- LSP
+-- LSP
 require("lsp.basedpyright")(capabilities)
 require("lsp.bashls")(capabilities)
 require("lsp.cssls")(capabilities)
-require("lsp.emmet_ls")(capabilities)
+require("lsp.emmet_language_server")(capabilities)
 require("lsp.harper_ls")(capabilities)
 require("lsp.html")(capabilities)
 require("lsp.jsonls")(capabilities)
@@ -19,18 +19,18 @@ require("lsp.clangd")(capabilities)
 require("lsp.efm")(capabilities)
 
 vim.lsp.enable({
-  'clangd',
-  'basedpyright',
-  'bashls',
-  'cssls',
-  'emmet_ls',
-  'harper_ls',
-  'html',
-  'jsonls',
-  'lua_ls',
-  'marksman',
-  'tailwindcss',
-  'vue_ls',
-  'vtsls',
-  'efm',
+	"clangd",
+	"basedpyright",
+	"bashls",
+	"cssls",
+	"emmet_language_server",
+	"harper_ls",
+	"html",
+	"jsonls",
+	"lua_ls",
+	"marksman",
+	"tailwindcss",
+	"vue_ls",
+	"vtsls",
+	"efm",
 })

@@ -45,4 +45,4 @@ require("lazy").setup({
 	ui = { border = "rounded" },
 })
 
-vim.opt.runtimepath = vim.list_extend(vim.opt.runtimepath:get(), { vim.fn.stdpath("config") .. "/treesitter" })
+vim.opt.runtimepath:prepend(vim.fn.stdpath("config") .. "/treesitter")

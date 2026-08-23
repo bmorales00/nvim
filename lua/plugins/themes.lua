@@ -17,7 +17,7 @@ return {
 				-- normal = "#000000", -- hexcode
 				-- normal = color.green, -- lackluster color
 				menu = "none", -- nvim_cmp, wildmenu ... (bad idea to transparent)
-				popup = "none", -- lazy, mason, whichkey ... (bad idea to transparent)
+				popup = "none", -- plugin popups (bad idea to make transparent)
 			},
 			tweak_highlight = {
 				["@comment"] = {

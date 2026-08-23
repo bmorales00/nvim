@@ -4,19 +4,46 @@ local on_attach = require("util.lsp").on_attach
 local lsp_fmt_group = vim.api.nvim_create_augroup("FormatOnSaveGroup", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = lsp_fmt_group,
-	callback = function()
-		local ft = vim.bo.filetype
+	callback = function(args)
+		local ft = vim.bo[args.buf].filetype
 		local lsp_formatters = {
 			c = "clangd",
+			cpp = "clangd",
+			cuda = "clangd",
+			objc = "clangd",
+			objcpp = "clangd",
+			css = "efm",
+			html = "efm",
+			javascript = "efm",
+			javascriptreact = "efm",
+			json = "efm",
+			jsonc = "efm",
+			less = "efm",
+			lua = "efm",
+			python = "efm",
+			scss = "efm",
+			sh = "efm",
+			typescript = "efm",
+			typescriptreact = "efm",
+			vue = "efm",
 		}
-		local formatter = lsp_formatters[ft] or "efm"
-		local clients = vim.lsp.get_clients({ name = formatter })
+		local formatter = lsp_formatters[ft]
+		if not formatter then
+			return
+		end
+
+		local clients = vim.lsp.get_clients({ bufnr = args.buf, name = formatter })
 
 		if vim.tbl_isempty(clients) then
 			return
 		end
 
-		vim.lsp.buf.format({ name = formatter, async = true })
+		vim.lsp.buf.format({
+			bufnr = args.buf,
+			name = formatter,
+			async = false,
+			timeout_ms = 3000,
+		})
 	end,
 })
 
@@ -50,31 +77,51 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 local lsp_on_attach_group = vim.api.nvim_create_augroup("LspMappings", {})
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_on_attach_group,
-	callback = on_attach,
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client then
+			on_attach(client, args.buf)
+		end
+	end,
 })
 
 -- Treesitter highlighting
+vim.treesitter.language.register("bash", { "bash", "sh" })
+vim.treesitter.language.register("javascript", "javascriptreact")
+vim.treesitter.language.register("json", "jsonc")
+vim.treesitter.language.register("markdown", "markdown.mdx")
+vim.treesitter.language.register("tsx", "typescriptreact")
+
 local ts_group = vim.api.nvim_create_augroup("TreesitterAttach", {})
 vim.api.nvim_create_autocmd("FileType", {
 	group = ts_group,
 	pattern = {
 		"lua",
 		"python",
-		"rust",
 		"javascript",
+		"javascriptreact",
 		"typescript",
 		"typescriptreact",
-    "vue",
+		"vue",
 		"html",
 		"css",
 		"json",
+		"jsonc",
 		"markdown",
+		"markdown.mdx",
 		"sh",
+		"bash",
 		"c",
 		"vim",
 		"vimdoc",
 	},
-	callback = function()
-		pcall(vim.treesitter.start)
+	callback = function(args)
+		local ok, err = pcall(vim.treesitter.start, args.buf)
+		if not ok then
+			vim.notify_once(
+				("Treesitter failed for %s: %s"):format(vim.bo[args.buf].filetype, err),
+				vim.log.levels.WARN
+			)
+		end
 	end,
 })

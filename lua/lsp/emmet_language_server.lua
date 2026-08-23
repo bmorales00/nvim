@@ -1,7 +1,7 @@
 --- @param capabilities table LSP client capabilities (for nvim-cmp or something similar)
 --- @return nil
 return function(capabilities)
-	vim.lsp.config("emmet_ls", {
+	vim.lsp.config("emmet_language_server", {
 		capabilities = capabilities,
 		filetypes = { "css", "scss", "sass", "less", "html" },
 	})

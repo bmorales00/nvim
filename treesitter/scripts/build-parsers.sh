@@ -1,54 +1,94 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DST=~/.config/nvim/treesitter/parser
-SRC=$(mktemp -d)
-mkdir -p "$DST"
+for tool in git jq tree-sitter; do
+	if ! command -v "$tool" >/dev/null 2>&1; then
+		echo "ERROR: required command not found: $tool" >&2
+		exit 1
+	fi
+done
 
-# Usage: build <repo-url> <output-lang> [<subdir-in-repo>]
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+CONFIG_DIR=$(cd -- "$SCRIPT_DIR/../.." && pwd)
+PARSER_DST="$CONFIG_DIR/treesitter/parser"
+QUERY_DST="$CONFIG_DIR/treesitter/queries"
+SRC=$(mktemp -d)
+trap 'rm -rf "$SRC"' EXIT
+
+mkdir -p "$PARSER_DST" "$QUERY_DST"
+
+NVIM_TREESITTER="$SRC/nvim-treesitter"
+echo ">>> Fetching the nvim-treesitter parser lockfile and queries"
+git clone --branch=master --depth=1 --quiet https://github.com/nvim-treesitter/nvim-treesitter "$NVIM_TREESITTER"
+
+# Build the exact grammar revision paired with the fetched query snapshot.
+# Usage: build <repo-url> <language> [<subdir-in-repo>]
 build() {
 	local url=$1 lang=$2 subdir=${3:-}
-	local name
-	name=$(basename "$url" .git)
-	local repo="$SRC/$name"
+	local repo="$SRC/grammar-$lang"
+	local revision
+	revision=$(jq -er --arg lang "$lang" '.[$lang].revision' "$NVIM_TREESITTER/lockfile.json")
 
-	echo ">>> $lang  ($url)"
-	rm -rf "$repo"
-	git clone --depth=1 --quiet "$url" "$repo"
+	echo ">>> $lang  ($url @ $revision)"
+	git init --quiet "$repo"
+	git -C "$repo" remote add origin "$url"
+	git -C "$repo" fetch --depth=1 --quiet origin "$revision"
+	git -C "$repo" checkout --detach --quiet FETCH_HEAD
 
 	if [ -n "$subdir" ]; then
-		(cd "$repo/$subdir" && tree-sitter build)
-		# Newer grammars output parser.so, older ones output <lang>.so
-		if [ -f "$repo/$subdir/parser.so" ]; then
-			src="$repo/$subdir/parser.so"
-		elif [ -f "$repo/$subdir/$lang.so" ]; then
-			src="$repo/$subdir/$lang.so"
-		else
-			echo "ERROR: no .so produced for $lang" >&2
-			exit 1
-		fi
-		cp "$src" "$DST/$lang.so"
+		(cd "$repo/$subdir" && tree-sitter build --output "$PARSER_DST/$lang.so")
 	else
-		(cd "$repo" && tree-sitter build)
-		if [ -f "$repo/parser.so" ]; then
-			src="$repo/parser.so"
-		elif [ -f "$repo/$lang.so" ]; then
-			src="$repo/$lang.so"
-		else
-			echo "ERROR: no .so produced for $lang" >&2
-			exit 1
-		fi
-		cp "$src" "$DST/$lang.so"
+		(cd "$repo" && tree-sitter build --output "$PARSER_DST/$lang.so")
 	fi
-
 }
-build https://github.com/tree-sitter/tree-sitter-typescript typescript typescript
-build https://github.com/tree-sitter/tree-sitter-typescript tsx tsx
 
-build https://github.com/tree-sitter/tree-sitter-html html
+build https://github.com/tree-sitter/tree-sitter-bash bash
+build https://github.com/tree-sitter/tree-sitter-c c
 build https://github.com/tree-sitter/tree-sitter-css css
+build https://github.com/tree-sitter/tree-sitter-html html
+build https://github.com/tree-sitter/tree-sitter-javascript javascript
 build https://github.com/tree-sitter/tree-sitter-json json
-build https://github.com/tree-sitter-grammars/tree-sitter-vue vue vue
-rm -rf "$SRC"
-echo ">>> Done. Parsers in $DST:"
-ls "$DST"
+build https://github.com/tree-sitter-grammars/tree-sitter-lua lua
+build https://github.com/tree-sitter-grammars/tree-sitter-markdown markdown tree-sitter-markdown
+build https://github.com/tree-sitter-grammars/tree-sitter-markdown markdown_inline tree-sitter-markdown-inline
+build https://github.com/tree-sitter/tree-sitter-python python
+build https://github.com/tree-sitter/tree-sitter-typescript tsx tsx
+build https://github.com/tree-sitter/tree-sitter-typescript typescript typescript
+build https://github.com/tree-sitter-grammars/tree-sitter-vim vim
+build https://github.com/neovim/tree-sitter-vimdoc vimdoc
+build https://github.com/tree-sitter-grammars/tree-sitter-vue vue
+
+QUERY_LANGUAGES=(
+	bash
+	c
+	css
+	ecma
+	html
+	html_tags
+	javascript
+	json
+	jsx
+	lua
+	markdown
+	markdown_inline
+	python
+	tsx
+	typescript
+	vim
+	vimdoc
+	vue
+)
+
+echo ">>> Refreshing Neovim query files"
+for lang in "${QUERY_LANGUAGES[@]}"; do
+	source_dir="$NVIM_TREESITTER/queries/$lang"
+	if [ ! -d "$source_dir" ]; then
+		echo "ERROR: queries missing for $lang" >&2
+		exit 1
+	fi
+	mkdir -p "$QUERY_DST/$lang"
+	cp "$source_dir"/*.scm "$QUERY_DST/$lang/"
+done
+
+echo ">>> Done. Parsers in $PARSER_DST:"
+ls "$PARSER_DST"

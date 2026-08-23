@@ -10,8 +10,8 @@ return function(capabilities)
 				},
 				workspace = {
 					library = {
-						vim.fn.expand("$VIMRUNTIME/lua"),
-						vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/lua",
+						vim.env.VIMRUNTIME .. "/lua",
+						vim.fn.stdpath("config") .. "/lua",
 					},
 				},
 			},
