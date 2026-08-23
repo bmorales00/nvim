@@ -1,5 +1,20 @@
 local on_attach = require("util.lsp").on_attach
 
+-- Detect Yaml in Ansible
+vim.filetype.add({
+	pattern = {
+		[".*%.ya?ml"] = {
+			function(path)
+				local directory = vim.fs.dirname(path)
+				if vim.fs.root(directory, { "ansible.cfg", ".ansible-lint" }) then
+					return "yaml.ansible"
+				end
+			end,
+			{ priority = 10 },
+		},
+	},
+})
+
 -- Auto-Format on Save
 local lsp_fmt_group = vim.api.nvim_create_augroup("FormatOnSaveGroup", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -26,6 +41,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			typescript = "efm",
 			typescriptreact = "efm",
 			vue = "efm",
+			yaml = "yamlls",
 		}
 		local formatter = lsp_formatters[ft]
 		if not formatter then
@@ -91,6 +107,7 @@ vim.treesitter.language.register("javascript", "javascriptreact")
 vim.treesitter.language.register("json", "jsonc")
 vim.treesitter.language.register("markdown", "markdown.mdx")
 vim.treesitter.language.register("tsx", "typescriptreact")
+vim.treesitter.language.register("yaml", "yaml.ansible")
 
 local ts_group = vim.api.nvim_create_augroup("TreesitterAttach", {})
 vim.api.nvim_create_autocmd("FileType", {
@@ -114,6 +131,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		"c",
 		"vim",
 		"vimdoc",
+		"yaml",
+		"yaml.ansible",
 	},
 	callback = function(args)
 		local ok, err = pcall(vim.treesitter.start, args.buf)

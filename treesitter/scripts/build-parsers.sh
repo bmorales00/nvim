@@ -57,6 +57,7 @@ build https://github.com/tree-sitter/tree-sitter-typescript typescript typescrip
 build https://github.com/tree-sitter-grammars/tree-sitter-vim vim
 build https://github.com/neovim/tree-sitter-vimdoc vimdoc
 build https://github.com/tree-sitter-grammars/tree-sitter-vue vue
+build https://github.com/tree-sitter-grammars/tree-sitter-yaml yaml
 
 QUERY_LANGUAGES=(
 	bash
@@ -77,6 +78,7 @@ QUERY_LANGUAGES=(
 	vim
 	vimdoc
 	vue
+	yaml
 )
 
 echo ">>> Refreshing Neovim query files"
