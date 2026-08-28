@@ -92,5 +92,20 @@ for lang in "${QUERY_LANGUAGES[@]}"; do
 	cp "$source_dir"/*.scm "$QUERY_DST/$lang/"
 done
 
+# The legacy nvim-treesitter master query uses a Lua directive supplied by the
+# plugin. This standalone parser setup does not load that plugin, so use
+# Neovim's native injection.language capture for fenced Markdown code blocks.
+markdown_injections="$QUERY_DST/markdown/injections.scm"
+sed -i \
+	-e 's/(language) @_lang)/(language) @injection.language)/' \
+	-e 's/(code_fence_content) @injection.content$/(code_fence_content) @injection.content)/' \
+	-e '/(#set-lang-from-info-string! @_lang))/d' \
+	"$markdown_injections"
+
+if grep -q 'set-lang-from-info-string' "$markdown_injections"; then
+	echo "ERROR: failed to make the Markdown injection query Neovim-compatible" >&2
+	exit 1
+fi
+
 echo ">>> Done. Parsers in $PARSER_DST:"
 ls "$PARSER_DST"
