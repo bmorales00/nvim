@@ -46,6 +46,7 @@ build https://github.com/tree-sitter/tree-sitter-bash bash
 build https://github.com/tree-sitter/tree-sitter-c c
 build https://github.com/tree-sitter/tree-sitter-css css
 build https://github.com/tree-sitter/tree-sitter-html html
+build https://github.com/tree-sitter/tree-sitter-go go
 build https://github.com/tree-sitter/tree-sitter-javascript javascript
 build https://github.com/tree-sitter/tree-sitter-json json
 build https://github.com/tree-sitter-grammars/tree-sitter-lua lua
@@ -64,6 +65,7 @@ QUERY_LANGUAGES=(
 	c
 	css
 	ecma
+	go
 	html
 	html_tags
 	javascript

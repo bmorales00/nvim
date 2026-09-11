@@ -1,10 +1,12 @@
 local capabilities = require("blink-cmp").get_lsp_capabilities()
 
 -- LSP
+require("lsp.ansiblels")(capabilities)
 require("lsp.basedpyright")(capabilities)
 require("lsp.bashls")(capabilities)
 require("lsp.cssls")(capabilities)
 require("lsp.emmet_language_server")(capabilities)
+require("lsp.gopls")(capabilities)
 require("lsp.harper_ls")(capabilities)
 require("lsp.html")(capabilities)
 require("lsp.jsonls")(capabilities)
@@ -15,7 +17,6 @@ require("lsp.vue_ls")(capabilities)
 require("lsp.vtsls")(capabilities)
 require("lsp.clangd")(capabilities)
 require("lsp.yamlls")(capabilities)
-require("lsp.ansiblels")(capabilities)
 
 -- Linter and Formatters
 require("lsp.efm")(capabilities)
@@ -27,6 +28,7 @@ vim.lsp.enable({
 	"bashls",
 	"cssls",
 	"emmet_language_server",
+	"gopls",
 	"harper_ls",
 	"html",
 	"jsonls",
