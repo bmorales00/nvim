@@ -32,7 +32,6 @@ return {
 		-- Config: Desired Modules
 		config = function()
 			-- Core
-			require("mini.ai").setup({})
 			require("mini.comment").setup({
 				opts = {
 					options = {
