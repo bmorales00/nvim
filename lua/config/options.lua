@@ -29,6 +29,7 @@ opt.completeopt = "menuone,noinsert,noselect" -- Completion options i.e explicit
 opt.fillchars = { eob = " " } -- chars to fill the statuslines
 opt.cursorline = true -- Highlight current line
 opt.winblend = 0 -- Floating window transparency
+opt.winborder = "rounded"
 opt.lazyredraw = false -- redraw while executing macros - false means it updates instantly
 opt.redrawtime = 10000 -- Timeout for sytax highlighting redraw
 

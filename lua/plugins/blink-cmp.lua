@@ -39,18 +39,27 @@ return {
 		completion = {
 			menu = {
 				border = "rounded",
-				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+				winhighlight = "Normal:BlinkCmpMenu,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 				draw = {
 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 				},
 			},
 			documentation = {
 				auto_show = true,
-				window = { border = "rounded" },
+				window = {
+					border = "rounded",
+					winhighlight = "Normal:BlinkCmpDoc,FloatBorder:FloatBorder,EndOfBuffer:BlinkCmpDoc",
+				},
 			},
 			-- Equivalent to your entry_filter (filtering out "Text" from LSP)
 			list = {
 				selection = { preselect = false, auto_insert = true },
+			},
+		},
+		signature = {
+			window = {
+				border = "rounded",
+				winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:FloatBorder",
 			},
 		},
 
