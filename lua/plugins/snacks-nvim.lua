@@ -1,33 +1,10 @@
--- snack plugins for nvim
-
-local snackKeys = {
-	{
-		"<leader>z",
-		function()
-			Snacks.zen()
-		end,
-		desc = "Toggle Zen Mode",
-	},
-	{
-		"<leader>Z",
-		function()
-			Snacks.zen.zoom()
-		end,
-		desc = "Toggle Zoom",
-	},
-}
-
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
 	---@type snacks.Config
 	opts = {
-		-- Core Modules
-		dashboard = { enabled = true },
-
 		-- QoL Modules
-		zen = { enabled = true },
 		indent = { enabled = true },
 
 		-- Image Module
@@ -41,11 +18,6 @@ return {
 				row = -1,
 				border = "rounded",
 			},
-			zen = {
-				minimal = false,
-				backdrop = { transparent = false, blend = 40 },
-			},
 		},
 	},
-	keys = snackKeys,
 }
