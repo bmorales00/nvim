@@ -6,19 +6,9 @@ return {
 
 		-- Key Triggers for desired modules
 		keys = {
-			-- mini.ai
-			{ "i", mode = "o" },
-			{ "a", mode = "o" },
-
-			-- mini.comment
-			{ "gc", mode = { "n", "v" } },
-
 			-- mini.move
 			{ "<A-j>", mode = { "n", "i", "v" } },
 			{ "<A-k>", mode = { "n", "i", "v" } },
-
-			-- mini.surround
-			{ "s", mode = { "n", "v" } },
 		},
 		cmd = {
 			-- mini.bufremove
@@ -31,19 +21,25 @@ return {
 
 		-- Config: Desired Modules
 		config = function()
-			-- Core
-			require("mini.comment").setup({
-				opts = {
-					options = {
-						custom_commentstring = function()
-							return require("ts_context_commentstring.internal").calculate_commentstring()
-								or vim.bo.commentstring
-						end,
-					},
-				},
-			})
 			require("mini.move").setup({})
-			require("mini.surround").setup({})
+			require("mini.surround").setup({
+				mappings = {
+					add = "ys",
+					delete = "ds",
+					find = "",
+					find_left = "",
+					highlight = "",
+					replace = "cs",
+					suffix_last = "",
+					suffix_next = "",
+				},
+				search_method = "cover_or_next",
+			})
+
+			-- Match vim-surround's Visual `S` and linewise `yss` mappings.
+			vim.keymap.del("x", "ys")
+			vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add("visual")<CR>]], { silent = true })
+			vim.keymap.set("n", "yss", "ys_", { remap = true })
 
 			-- Utility
 			require("mini.cursorword").setup({})
@@ -53,9 +49,5 @@ return {
 			require("mini.icons").setup({})
 			MiniIcons.mock_nvim_web_devicons()
 		end,
-
-		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring", -- Dependency for Mini.Comment
-		},
 	},
 }
