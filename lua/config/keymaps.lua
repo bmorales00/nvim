@@ -48,11 +48,11 @@ vim.api.nvim_set_keymap("v", "jk", "<ESC>", { noremap = false })
 -- Comments
 
 if vim.env.TMUX ~= nil then
-	api.nvim_set_keymap("n", "<C-_>", "gtc", { noremap = false })
-	api.nvim_set_keymap("v", "<C-_>", "goc", { noremap = false })
+	api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
+	api.nvim_set_keymap("v", "<C-_>", "gc", { noremap = false })
 else
-	api.nvim_set_keymap("n", "<C-/>", "gtc", { noremap = false })
-	api.nvim_set_keymap("v", "<C-/>", "goc", { noremap = false })
+	api.nvim_set_keymap("n", "<C-/>", "gcc", { noremap = false })
+	api.nvim_set_keymap("v", "<C-/>", "gc", { noremap = false })
 end
 
 -- DAP (Debugger Adapter Protocol)

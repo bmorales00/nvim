@@ -2,4 +2,3 @@
 -- Such as adding clipboard support, setting leader key, etc.
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
