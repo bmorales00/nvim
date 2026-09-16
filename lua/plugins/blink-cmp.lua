@@ -2,18 +2,11 @@ return {
 	"saghen/blink.cmp",
 	-- Note: blink.cmp provides its own release tags
 	version = "*",
-	dependencies = {
-		"L3MON4D3/LuaSnip",
-		version = "v2.*",
-		dependencies = { "rafamadriz/friendly-snippets" },
-		config = function()
-			require("luasnip/loaders/from_vscode").lazy_load()
-		end,
-	},
+	dependencies = { "rafamadriz/friendly-snippets" },
 
 	opts = {
 		cmdline = { enabled = false },
-		snippets = { preset = "luasnip" },
+		snippets = { preset = "default" },
 
 		-- Keymaps: matching your nvim-cmp setup
 		keymap = {
