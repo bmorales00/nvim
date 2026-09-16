@@ -114,9 +114,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = ts_group,
 	pattern = {
 		"lua",
-    "go",
-    "gomod",
-    "gowork",
+		"go",
+		"gomod",
+		"gowork",
 		"python",
 		"javascript",
 		"javascriptreact",
