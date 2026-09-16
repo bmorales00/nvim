@@ -14,7 +14,7 @@ opt.wrap = false -- Don't wrap lines meaning lines will continue off-screen
 opt.incsearch = true -- Highlights first matches as you type
 opt.ignorecase = true -- Case-insensitive search | Will not treat lower and upper the same
 opt.smartcase = true -- Case-Sensitive if uppercase in search when explicit
-opt.hlsearch = false -- Don't Highlight search results when searching
+opt.hlsearch = true -- Don't Highlight search results when searching
 
 -- Appearance
 opt.number = true -- Line Numbers in the left margin
@@ -22,7 +22,7 @@ opt.relativenumber = true --Relative Line Numbers based on cursor pos
 opt.termguicolors = true -- Enable 24-bit colors for better color display
 opt.colorcolumn = "100" -- Visually Highlights a specific column after # of chars ->
 opt.signcolumn = "yes" -- Always show sign column like breakpoints,linter errors,etc
-opt.cmdheight = 1 -- Command line height
+opt.cmdheight = 0 -- Command line height
 opt.scrolloff = 10 -- When scrolling, the cursor will be at least 10 lines away from top and bott
 opt.sidescrolloff = 10 -- Same as scrolloff just in terms of columns or left/right
 opt.completeopt = "menuone,noinsert,noselect" -- Completion options i.e explicitly choose
@@ -75,3 +75,6 @@ opt.guicursor =
 opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevel = 99
+
+-- Enable Global Statusline so that its shared
+opt.laststatus = 3
