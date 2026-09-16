@@ -4,7 +4,9 @@ return {
 	lazy = false,
 	opts = {
 		win = {
-			border = "single",
+			width = 0.25,
+			col = 0.99,
+			border = "rounded",
 		},
 	},
 }
