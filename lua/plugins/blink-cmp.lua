@@ -1,6 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	-- Note: blink.cmp provides its own release tags
+	event = "InsertEnter",
 	version = "*",
 	dependencies = { "rafamadriz/friendly-snippets" },
 

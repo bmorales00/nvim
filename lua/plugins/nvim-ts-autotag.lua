@@ -1,7 +1,7 @@
 -- Plugin that uses treesitter to automatically close and rename tags
 return {
 	"windwp/nvim-ts-autotag",
-	lazy = false,
+	ft = { "html", "javascriptreact", "typescriptreact", "vue" },
 	config = function()
 		require("nvim-ts-autotag").setup({
 			opts = {

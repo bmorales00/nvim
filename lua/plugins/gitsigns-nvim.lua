@@ -3,7 +3,7 @@
 -- The sign column is the column on the left side of the buffer where line numbers are displayed
 return {
 	"lewis6991/gitsigns.nvim",
-	lazy = false,
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require("gitsigns").setup()
 	end,

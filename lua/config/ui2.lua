@@ -14,8 +14,8 @@ if ok then
 				echomsg = "msg",
 				completion = "cmd",
 
-				emsg = "pager",
-				echoerr = "pager",
+				emsg = "msg",
+				echoerr = "msg",
 				list_cmd = "pager",
 				lua_error = "pager",
 			},

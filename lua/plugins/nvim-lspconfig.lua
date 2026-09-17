@@ -2,6 +2,7 @@
 
 return {
 	"neovim/nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("util.icons").setup()
 		require("lsp")
