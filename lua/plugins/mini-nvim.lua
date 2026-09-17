@@ -10,10 +10,6 @@ return {
 			{ "<A-j>", mode = { "n", "i", "v" } },
 			{ "<A-k>", mode = { "n", "i", "v" } },
 		},
-		cmd = {
-			-- mini.bufremove
-			"Bdelete",
-		},
 		event = {
 			-- Delayed event for modules that are critical but not startup critical
 			"VeryLazy",
@@ -44,7 +40,6 @@ return {
 			-- Utility
 			require("mini.cursorword").setup({})
 			require("mini.pairs").setup({})
-			require("mini.bufremove").setup({})
 			-- Icons
 			require("mini.icons").setup({})
 			MiniIcons.mock_nvim_web_devicons()
