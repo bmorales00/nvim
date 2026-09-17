@@ -4,23 +4,30 @@ local M = {}
 
 M.on_attach = function(client, bufnr)
 	local keymap = vim.keymap
-	local opts = { noremap = true, silent = true, buffer = bufnr }
+	local map = function(lhs, rhs, desc)
+		keymap.set("n", lhs, rhs, {
+			noremap = true,
+			silent = true,
+			buffer = bufnr,
+			desc = desc,
+		})
+	end
 
 	-- native neovim keymaps
-	keymap.set("n", "<leader>gD", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) -- goto def
-	keymap.set("n", "<leader>gS", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", opts) -- goto def in vsplit
-	keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts) -- code actions
-	keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts) -- rename
-	keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<CR>", opts) -- cursor diagnostic
-	keymap.set("n", "<leader>D", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts) -- line diagnostic
-	keymap.set("n", "<leader>pd", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts) -- prev diagnostic
-	keymap.set("n", "<leader>nd", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts) -- next diagnostic
-	keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts) -- hover doc
-	keymap.set("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts) -- list references
-	keymap.set("n", "<leader>go", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts) -- list doc symbol
+	map("<leader>gD", "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition")
+	map("<leader>gS", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", "Definition in vertical split")
+	map("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action")
+	map("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol")
+	map("<leader>d", "<cmd>lua vim.diagnostic.open_float()<CR>", "Cursor diagnostics")
+	map("<leader>D", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", "Line diagnostics")
+	map("<leader>pd", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Previous diagnostic")
+	map("<leader>nd", "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic")
+	map("K", "<cmd>lua vim.lsp.buf.hover()<CR>", "LSP hover")
+	map("<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", "List references")
+	map("<leader>go", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Document symbols")
 
 	if client.name == "basedpyright" then
-		keymap.set("n", "<leader>oi", "<cmd>LspPyrightOrganizeImports<CR>", opts)
+		map("<leader>oi", "<cmd>LspPyrightOrganizeImports<CR>", "Organize imports")
 	end
 end
 return M

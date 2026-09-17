@@ -17,6 +17,62 @@ return {
 
 		-- Config: Desired Modules
 		config = function()
+			local miniclue = require("mini.clue")
+			-- KeyMap Popup
+			miniclue.setup({
+				triggers = {
+					-- Leader
+					{ mode = { "n", "x" }, keys = "<Leader>" },
+
+					-- Built-in
+					{ mode = "n", keys = "[" },
+					{ mode = "n", keys = "]" },
+					{ mode = { "n", "x" }, keys = "g" },
+					{ mode = { "n", "x" }, keys = "z" },
+
+					--Marks
+					{ mode = { "n", "x" }, keys = "'" },
+					{ mode = { "n", "x" }, keys = "`" },
+
+					-- Registers
+					{ mode = { "n", "x" }, keys = '"' },
+					{ mode = { "i", "c" }, keys = "<C-r>" },
+
+					-- Window Commands
+					{ mode = "n", keys = "<C-w>" },
+
+					-- Completeion
+					{ mode = "i", keys = "<C-x>" },
+				},
+
+				clues = {
+					miniclue.gen_clues.square_brackets(),
+					miniclue.gen_clues.builtin_completion(),
+					miniclue.gen_clues.g(),
+					miniclue.gen_clues.marks(),
+					miniclue.gen_clues.registers(),
+					miniclue.gen_clues.windows(),
+					miniclue.gen_clues.z(),
+					{ mode = "n", keys = "<Leader>b", desc = "+Buffers" },
+					{ mode = "n", keys = "<Leader>g", desc = "+LSP" },
+					{ mode = "n", keys = "<Leader>h", desc = "+Harpoon" },
+					{ mode = "n", keys = "<Leader>n", desc = "+Diagnostics" },
+					{ mode = "n", keys = "<Leader>o", desc = "+Organize" },
+					{ mode = "n", keys = "<Leader>s", desc = "+Splits" },
+					{ mode = "n", keys = "<Leader>t", desc = "+Trouble" },
+				},
+				window = {
+					delay = 300,
+					config = {
+						anchor = "SE",
+						row = "auto",
+						col = "auto",
+						width = "auto",
+						border = "rounded",
+					},
+				},
+			})
+
 			require("mini.move").setup({})
 			require("mini.surround").setup({
 				mappings = {
@@ -34,8 +90,13 @@ return {
 
 			-- Match vim-surround's Visual `S` and linewise `yss` mappings.
 			vim.keymap.del("x", "ys")
-			vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add("visual")<CR>]], { silent = true })
-			vim.keymap.set("n", "yss", "ys_", { remap = true })
+			vim.keymap.set(
+				"x",
+				"S",
+				[[:<C-u>lua MiniSurround.add("visual")<CR>]],
+				{ silent = true, desc = "Add surrounding" }
+			)
+			vim.keymap.set("n", "yss", "ys_", { remap = true, desc = "Surround line" })
 
 			-- Utility
 			require("mini.cursorword").setup({})

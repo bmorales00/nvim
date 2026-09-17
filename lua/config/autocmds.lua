@@ -97,6 +97,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		if client then
 			on_attach(client, args.buf)
+			if _G.MiniClue then
+				MiniClue.ensure_buf_triggers(args.buf)
+			end
 		end
 	end,
 })

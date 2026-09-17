@@ -1,7 +1,12 @@
 return {
 	"ThePrimeagen/harpoon",
 	branch = "harpoon2",
-	keys = { "<leader>ha", "<leader>hh", "<leader>hn", "<leader>hp" },
+	keys = {
+		{ "<leader>ha", desc = "Add buffer to Harpoon" },
+		{ "<leader>hh", desc = "Show Harpoon list" },
+		{ "<leader>hn", desc = "Previous Harpoon buffer" },
+		{ "<leader>hp", desc = "Next Harpoon buffer" },
+	},
 	dependencies = { { "nvim-lua/plenary.nvim", lazy = true, module = false } },
 	config = function()
 		-- REQUIRED
@@ -34,9 +39,9 @@ return {
 		-- Toggle previous & next buffers stored within Harpoon list
 		vim.keymap.set("n", "<leader>hn", function()
 			harpoon:list():prev()
-		end, { desc = "Harpoon Buffer Next" })
+		end, { desc = "Previous Harpoon buffer" })
 		vim.keymap.set("n", "<leader>hp", function()
 			harpoon:list():next()
-		end, { desc = "Harpoon Buffer Previous" })
+		end, { desc = "Next Harpoon buffer" })
 	end,
 }
