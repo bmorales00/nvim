@@ -1,5 +1,5 @@
 return {
-	"dmtrKovalenko/fff.nvim",
+	"dmtrKovalenko/fff",
 	build = function()
 		-- Download a prebuilt binary or build it from source.
 		-- (if you are using lazy you can use gb for rebuilding a plugin if needed)
@@ -8,10 +8,9 @@ return {
 	-- if you are using nixos
 	-- build = "nix run .#release",
 	opts = { -- (optional)
-		prompt = "> ",
 		debug = {
-			enabled = false, -- we expect your collaboration at least during the beta
-			show_scores = false, -- to help us optimize the scoring system, feel free to share your scores!
+			enabled = true, -- we expect your collaboration at least during the beta
+			show_scores = true, -- to help us optimize the scoring system, feel free to share your scores!
 		},
 		hl = {
 			active_file = "StatusLine",
@@ -52,6 +51,23 @@ return {
 				require("fff").live_grep({ query = vim.fn.expand("<cword>") })
 			end,
 			desc = "Search current word",
+		},
+		{
+			"fs",
+			function()
+				require("fff").scan_files()
+			end,
+			desc = "Re-scan Files",
+		},
+		{
+			"fd",
+			function()
+				local dir = require("oil").get_current_dir()
+				if dir then
+					require("fff").find_files_in_dir(dir)
+				end
+			end,
+			desc = "Find files in current Oil directory",
 		},
 	},
 }
