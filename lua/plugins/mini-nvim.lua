@@ -60,6 +60,7 @@ return {
 					{ mode = "n", keys = "<Leader>o", desc = "+Organize" },
 					{ mode = "n", keys = "<Leader>s", desc = "+Splits" },
 					{ mode = "n", keys = "<Leader>t", desc = "+Trouble" },
+					{ mode = "n", keys = "<Leader>v", desc = "+Git" },
 				},
 				window = {
 					delay = 300,
