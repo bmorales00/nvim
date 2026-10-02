@@ -6,6 +6,7 @@ return {
 	---@module 'render-markdown'
 	---@type render.md.UserConfig
 	ft = { "markdown", "markdown.mdx" },
+	opts = {},
 	config = function()
 		require("render-markdown").setup({
 			completions = { lsp = { enabled = true } },
