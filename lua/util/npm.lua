@@ -14,14 +14,15 @@ local function node_modules_root(executable_path)
 	return resolved_path:match("^(.-[/\\]node_modules)[/\\]")
 end
 
---- Find an npm package from one of its executables without assuming an installer.
+--- Try to find an npm package from one of its executables without assuming an installer.
 --- @param executable string
 --- @param package_name string
---- @return string
-function M.package_root(executable, package_name)
+--- @return string? package_root
+--- @return string? error
+function M.try_package_root(executable, package_name)
 	local executable_path = vim.fn.exepath(executable)
 	if executable_path == "" then
-		error(("Executable not found: %s"):format(executable))
+		return nil, ("executable not found: %s"):format(executable)
 	end
 
 	local node_modules = node_modules_root(executable_path)
@@ -54,7 +55,17 @@ function M.package_root(executable, package_name)
 		end
 	end
 
-	error(("Could not locate npm package %s from %s"):format(package_name, executable_path))
+	return nil, ("could not locate npm package %s from %s"):format(package_name, executable_path)
+end
+
+--- Find an npm package from one of its executables without assuming an installer.
+--- @param executable string
+--- @param package_name string
+--- @return string
+function M.package_root(executable, package_name)
+	local package_root, err = M.try_package_root(executable, package_name)
+	assert(package_root, err)
+	return package_root
 end
 
 --- Return a directory TypeScript can use to resolve an npm package by name.
@@ -63,6 +74,19 @@ end
 --- @return string
 function M.package_search_path(executable, package_name)
 	local package_root = M.package_root(executable, package_name)
+	return package_root:sub(1, -#package_name - 2)
+end
+
+--- Try to return a directory TypeScript can use to resolve an npm package by name.
+--- @param executable string
+--- @param package_name string
+--- @return string? search_path
+--- @return string? error
+function M.try_package_search_path(executable, package_name)
+	local package_root, err = M.try_package_root(executable, package_name)
+	if not package_root then
+		return nil, err
+	end
 	return package_root:sub(1, -#package_name - 2)
 end
 

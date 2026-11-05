@@ -13,15 +13,18 @@ require("lsp.jsonls")(capabilities)
 require("lsp.lua_ls")(capabilities)
 require("lsp.marksman")(capabilities)
 require("lsp.tailwindcss")(capabilities)
-require("lsp.vue_ls")(capabilities)
-require("lsp.vtsls")(capabilities)
+local vue_plugin_ok, vue_error = require("lsp.vtsls")(capabilities)
+local vue_ok = false
+if vue_plugin_ok then
+	vue_ok, vue_error = require("lsp.vue_ls")(capabilities)
+end
 require("lsp.clangd")(capabilities)
 require("lsp.yamlls")(capabilities)
 
 -- Linter and Formatters
 require("lsp.efm")(capabilities)
 
-vim.lsp.enable({
+local enabled_servers = {
 	"ansiblels",
 	"clangd",
 	"basedpyright",
@@ -35,8 +38,15 @@ vim.lsp.enable({
 	"lua_ls",
 	"marksman",
 	"tailwindcss",
-	"vue_ls",
 	"vtsls",
 	"efm",
 	"yamlls",
-})
+}
+
+if vue_ok then
+	table.insert(enabled_servers, "vue_ls")
+elseif vue_error then
+	vim.notify_once("Vue LSP disabled: " .. vue_error, vim.log.levels.WARN)
+end
+
+vim.lsp.enable(enabled_servers)
