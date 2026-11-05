@@ -25,7 +25,7 @@ return {
 					end,
 				},
 			},
-			ui = { enabled = false },
+			ui = { enable = false },
 			legacy_commands = false,
 
 			attachments = {

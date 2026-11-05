@@ -1,15 +1,11 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
-	dependencies = { "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-	-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-	-- dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+	dependencies = { "nvim-mini/mini.nvim" },
 	---@module 'render-markdown'
 	---@type render.md.UserConfig
 	ft = { "markdown", "markdown.mdx" },
-	opts = {},
-	config = function()
-		require("render-markdown").setup({
-			completions = { lsp = { enabled = true } },
-		})
-	end,
+	opts = {
+		latex = { enabled = false },
+		completions = { lsp = { enabled = true } },
+	},
 }
