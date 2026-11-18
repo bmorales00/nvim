@@ -1,10 +1,9 @@
 return {
 	{
 		"rachartier/tiny-cmdline.nvim",
-		init = function()
-			vim.o.cmdheight = 0
+		-- cmdheight = 0 is set in config/options.lua before lazy loads plugins.
+		config = function()
 			require("tiny-cmdline").setup({
-				on_reposition = require("tiny-cmdline").adapters.blink,
 				native_types = {},
 				title = {
 					enabled = true,

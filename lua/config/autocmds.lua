@@ -76,6 +76,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Native cmdline autocompletion (:h cmdline-autocompletion)
+local cmdline_complete_group = vim.api.nvim_create_augroup("CmdlineAutocomplete", {})
+vim.api.nvim_create_autocmd("CmdlineChanged", {
+	group = cmdline_complete_group,
+	pattern = { ":", "/", "?" },
+	callback = function()
+		vim.fn.wildtrigger()
+	end,
+})
+
 -- Restore cursor to file position in previous editing session
 local return_last_pos = vim.api.nvim_create_augroup("LastPosGroup", {})
 vim.api.nvim_create_autocmd("BufReadPost", {

@@ -45,6 +45,14 @@ local api = vim.api
 vim.api.nvim_set_keymap("i", "jk", "<ESC>", { noremap = false, desc = "Exit insert mode" })
 vim.api.nvim_set_keymap("v", "jk", "<ESC>", { noremap = false, desc = "Exit visual mode" })
 
+-- Cmdline: keep <Up>/<Down> for history even while the completion popup is open
+vim.keymap.set("c", "<Up>", function()
+	return vim.fn.wildmenumode() == 1 and "<C-e><Up>" or "<Up>"
+end, { expr = true, desc = "History back (close completion)" })
+vim.keymap.set("c", "<Down>", function()
+	return vim.fn.wildmenumode() == 1 and "<C-e><Down>" or "<Down>"
+end, { expr = true, desc = "History forward (close completion)" })
+
 -- Comments
 
 if vim.env.TMUX ~= nil then

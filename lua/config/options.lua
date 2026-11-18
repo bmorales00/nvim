@@ -26,6 +26,8 @@ opt.cmdheight = 0 -- Command line height
 opt.scrolloff = 10 -- When scrolling, the cursor will be at least 10 lines away from top and bott
 opt.sidescrolloff = 10 -- Same as scrolloff just in terms of columns or left/right
 opt.completeopt = "menuone,noinsert,noselect" -- Completion options i.e explicitly choose
+opt.wildmode = "noselect:lastused,full" -- Cmdline completion: show popup without selecting, buffers by last used
+opt.wildoptions = "pum,fuzzy" -- Cmdline completion in a popup menu with fuzzy matching
 opt.fillchars = { eob = " " } -- chars to fill the statuslines
 opt.cursorline = true -- Highlight current line
 opt.winblend = 0 -- Floating window transparency
