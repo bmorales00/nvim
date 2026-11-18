@@ -2,22 +2,23 @@ local ok, ui2 = pcall(require, "vim._core.ui2")
 
 if ok then
 	ui2.enable({
-		enable = true,
 		msg = {
+			-- Everything not listed below (echo, errors, warnings, progress, print, ...) goes here
 			target = "msg",
+			-- Per-kind overrides, see :h ui-messages for the full list of kinds
 			targets = {
-				[""] = "msg",
-				empty = "cmd",
-				progress = "msg",
 				confirm = "cmd",
-				echo = "msg",
-				echomsg = "msg",
 				completion = "cmd",
 
-				emsg = "msg",
-				echoerr = "msg",
-				list_cmd = "pager",
+				-- Output you want to read or scroll: keep it in the pager instead of timing out
+				list_cmd = "pager", -- :ls, :set, :map, ...
 				lua_error = "pager",
+				rpc_error = "pager",
+				verbose = "pager",
+				shell_cmd = "pager", -- :!cmd - keep the command, its output and exit code together
+				shell_out = "pager",
+				shell_err = "pager",
+				shell_ret = "pager",
 			},
 			dialog = { height = 0.5 },
 			msg = { height = 0.4 },
