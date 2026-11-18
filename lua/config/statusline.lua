@@ -1,28 +1,24 @@
+-- Powerline round caps used by the pill components below
+local LEFT_CAP = "\238\130\182" -- U+E0B6
+local RIGHT_CAP = "\238\130\180" -- U+E0B4
+
+--- @return string icon, string filetype
 local get_file_info = function()
-	if not package.loaded["mini.icons"] then
-		return "Mini Icons is needed to use Icons in the Statusline"
-	end
-	local full_path = vim.api.nvim_buf_get_name(0)
-	local extension = vim.fn.expand("%:e")
 	local filetype = vim.bo.filetype
-
-	if not filetype then
-		filetype = "No Filetype for Current File"
+	-- Statusline can render before lazy has loaded mini.nvim (e.g. startup error prompts)
+	if not package.loaded["mini.icons"] then
+		return "", filetype
 	end
 
-	local icon = MiniIcons.get("filetype", filetype)
-
-	if not icon then
-		icon = MiniIcons.get("extension", extension)
+	-- MiniIcons.get never returns nil; it flags its generic fallback with is_default
+	local icon, _, is_default = MiniIcons.get("filetype", filetype)
+	if is_default then
+		local full_path = vim.api.nvim_buf_get_name(0)
+		if full_path ~= "" then
+			icon = MiniIcons.get("file", full_path) -- covers extension and exact filename
+		end
 	end
-	if not icon then
-		icon = MiniIcons.get("file", full_path)
-	end
-
-	if not icon then
-		return ""
-	end
-	return icon or "", filetype
+	return icon, filetype
 end
 
 local hl = function(group)
@@ -65,6 +61,18 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	group = vim.api.nvim_create_augroup("statusline", {}),
 	desc = "Re-apply StatusLine Highlights on ColorScheme Change",
 	callback = set_hl_groups,
+})
+
+-- reg_recording() changes don't trigger a statusline redraw on their own.
+-- Scheduled so RecordingLeave sees reg_recording() already cleared.
+vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
+	group = vim.api.nvim_create_augroup("statusline_recording", {}),
+	desc = "Redraw statusline when macro recording starts or stops",
+	callback = function()
+		vim.schedule(function()
+			vim.cmd.redrawstatus()
+		end)
+	end,
 })
 
 local get_diagnostics_info = function()
@@ -139,7 +147,22 @@ local mode_settings = {
 }
 
 local get_mode = function()
-	return mode_settings[vim.fn.mode(1)] or { name = "UNKOWN", hl = "Normal" }
+	return mode_settings[vim.fn.mode(1)] or { name = "UNKNOWN", hl = "Normal" }
+end
+
+-- Macro recording indicator (hidden by cmdheight = 0)
+local recording_component = function()
+	local reg = vim.fn.reg_recording()
+	if reg == "" then
+		return ""
+	end
+
+	return table.concat({
+		"%#SLModeReplaceInverted# ",
+		"%#SLModeReplaceInverted#" .. LEFT_CAP,
+		"%#SLModeReplace#REC @" .. reg,
+		"%#SLModeReplaceInverted#" .. RIGHT_CAP,
+	})
 end
 
 local diagnostic_component = function(mode)
@@ -209,6 +232,7 @@ function status.render()
 	return table.concat({
 		left_side_component(current_mode),
 		diagnostic_component(current_mode),
+		recording_component(),
 		"%=",
 		right_side_component(current_mode),
 	})
