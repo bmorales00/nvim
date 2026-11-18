@@ -1,6 +1,7 @@
 -- Powerline round caps used by the pill components below
 local LEFT_CAP = "\238\130\182" -- U+E0B6
 local RIGHT_CAP = "\238\130\180" -- U+E0B4
+local BRANCH_ICON = "\238\130\160" -- U+E0A0
 
 --- @return string icon, string filetype
 local get_file_info = function()
@@ -43,8 +44,7 @@ local set_hl_groups = function()
 		ModeInsert = { fg = base_bg, bg = hl("DiffAdded").fg },
 		ModeCommand = { fg = base_bg, bg = hl("Number").fg },
 		ModeReplace = { fg = base_bg, bg = hl("Constant").fg },
-		Bold = { fg = base_bg, bg = base.fg },
-		Dim = { fg = base_bg, bg = base.fg },
+		Recording = { fg = base_bg, bg = hl("DiagnosticError").fg },
 	}) do
 		local group_name = "SL" .. group
 		vim.api.nvim_set_hl(0, group_name, opts)
@@ -72,6 +72,16 @@ vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
 		vim.schedule(function()
 			vim.cmd.redrawstatus()
 		end)
+	end,
+})
+
+-- gitsigns only fires User GitSignsUpdate when hunk counts or branch change; it doesn't redraw.
+vim.api.nvim_create_autocmd("User", {
+	group = vim.api.nvim_create_augroup("statusline_git", {}),
+	pattern = "GitSignsUpdate",
+	desc = "Redraw statusline when gitsigns status changes",
+	callback = function()
+		vim.cmd.redrawstatus()
 	end,
 })
 
@@ -124,9 +134,9 @@ local mode_settings = {
 	["Vs"] = { name = "V-LINE", hl = "Visual" },
 	["\22"] = { name = "V-BLOCK", hl = "Visual" },
 	["\22s"] = { name = "V-BLOCK", hl = "Visual" },
-	["s"] = { name = "SELECT", hl = "Insert" },
-	["S"] = { name = "S-LINE", hl = "Normal" },
-	["\19"] = { name = "S-BLOCK", hl = "Normal" },
+	["s"] = { name = "SELECT", hl = "Visual" },
+	["S"] = { name = "S-LINE", hl = "Visual" },
+	["\19"] = { name = "S-BLOCK", hl = "Visual" },
 	["i"] = { name = "INSERT", hl = "Insert" },
 	["ic"] = { name = "INSERT", hl = "Insert" },
 	["ix"] = { name = "INSERT", hl = "Insert" },
@@ -139,7 +149,9 @@ local mode_settings = {
 	["c"] = { name = "COMMAND", hl = "Command" },
 	["cv"] = { name = "EX", hl = "Command" },
 	["ce"] = { name = "EX", hl = "Command" },
-	["r"] = { name = "REPLACE", hl = "Normal" },
+	["cr"] = { name = "COMMAND", hl = "Command" },
+	["cvr"] = { name = "EX", hl = "Command" },
+	["r"] = { name = "PROMPT", hl = "Normal" },
 	["rm"] = { name = "MORE", hl = "Normal" },
 	["r?"] = { name = "CONFIRM", hl = "Normal" },
 	["!"] = { name = "SHELL", hl = "Normal" },
@@ -158,10 +170,65 @@ local recording_component = function()
 	end
 
 	return table.concat({
-		"%#SLModeReplaceInverted# ",
-		"%#SLModeReplaceInverted#" .. LEFT_CAP,
-		"%#SLModeReplace#REC @" .. reg,
-		"%#SLModeReplaceInverted#" .. RIGHT_CAP,
+		"%#SLRecordingInverted# ",
+		"%#SLRecordingInverted#" .. LEFT_CAP,
+		"%#SLRecording# REC @" .. reg .. " ",
+		"%#SLRecordingInverted#" .. RIGHT_CAP,
+	})
+end
+
+-- Branch and hunk counts from gitsigns (vim.b.gitsigns_status_dict is unset outside git repos)
+local git_component = function(mode)
+	local status = vim.b.gitsigns_status_dict
+	if not status or not status.head or status.head == "" then
+		return ""
+	end
+
+	local parts = { BRANCH_ICON .. " " .. status.head }
+	if (status.added or 0) > 0 then
+		table.insert(parts, "%$GitSignsAdd$+" .. status.added)
+	end
+	if (status.changed or 0) > 0 then
+		table.insert(parts, "%$GitSignsChange$~" .. status.changed)
+	end
+	if (status.removed or 0) > 0 then
+		table.insert(parts, "%$GitSignsDelete$-" .. status.removed)
+	end
+
+	local group = "%#SLMode" .. mode.hl
+	local inverted = group .. "Inverted#"
+	local normal = group .. "#"
+
+	return table.concat({
+		inverted .. " ",
+		inverted .. LEFT_CAP,
+		normal .. " ",
+		normal .. table.concat(parts, " "),
+		normal .. " ",
+		inverted .. RIGHT_CAP,
+	})
+end
+
+-- Search position (hidden by cmdheight = 0; ui2 drops the built-in [x/y])
+local search_component = function(mode)
+	if vim.v.hlsearch == 0 then
+		return ""
+	end
+	local ok, sc = pcall(vim.fn.searchcount, { maxcount = 999, timeout = 50 })
+	if not ok or sc.total == 0 then
+		return ""
+	end
+
+	-- incomplete: 1 = timed out, 2 = more than maxcount matches
+	local text = sc.incomplete == 1 and "?/??"
+		or string.format("%d/%d%s", sc.current, sc.total, sc.incomplete == 2 and "+" or "")
+
+	local group = "%#SLMode" .. mode.hl
+	return table.concat({
+		group .. "Inverted#" .. LEFT_CAP,
+		group .. "# " .. text .. " ",
+		group .. "Inverted#" .. RIGHT_CAP,
+		group .. "Inverted# ",
 	})
 end
 
@@ -199,7 +266,8 @@ local left_side_component = function(mode)
 
 		"%#SLMode" .. mode.hl .. "Inverted" .. "#",
 		"%#SLMode" .. mode.hl .. "# ",
-		"%#SLMode" .. mode.hl .. "#" .. "%f %m",
+		-- %< truncates the path first when the line is too narrow; %m only gets a space when it shows
+		"%#SLMode" .. mode.hl .. "#" .. "%<%f" .. ((vim.bo.modified or not vim.bo.modifiable) and " %m" or ""),
 		"%#SLMode" .. mode.hl .. "# ",
 		"%#SLMode" .. mode.hl .. "Inverted" .. "#",
 	})
@@ -232,8 +300,10 @@ function status.render()
 	return table.concat({
 		left_side_component(current_mode),
 		diagnostic_component(current_mode),
+		git_component(current_mode),
 		recording_component(),
 		"%=",
+		search_component(current_mode),
 		right_side_component(current_mode),
 	})
 end
